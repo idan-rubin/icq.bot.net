@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICQ.Bot.Net", "ICQ.Bot\ICQ.Bot.Net.csproj", "{886D9B46-EC55-46D2-98CA-C61DBF882129}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICQ.Bot.Net.Test", "ICQ.Bot.Test\ICQ.Bot.Net.Test.csproj", "{5D23B8B7-CBA4-4599-B353-0AC7ADB42670}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{886D9B46-EC55-46D2-98CA-C61DBF882129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{886D9B46-EC55-46D2-98CA-C61DBF882129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{886D9B46-EC55-46D2-98CA-C61DBF882129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{886D9B46-EC55-46D2-98CA-C61DBF882129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D23B8B7-CBA4-4599-B353-0AC7ADB42670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D23B8B7-CBA4-4599-B353-0AC7ADB42670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D23B8B7-CBA4-4599-B353-0AC7ADB42670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D23B8B7-CBA4-4599-B353-0AC7ADB42670}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13194CC6-FB45-4F8E-A899-D29DDFE8B48A}
+	EndGlobalSection
+EndGlobal

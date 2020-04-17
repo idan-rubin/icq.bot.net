@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ICQ.Bot/bin/Debug
+/ICQ.Bot/obj
+/.vs
