@@ -6,6 +6,6 @@ Currently supports the following:
 * Get Bot updates - polling is currently the only supported method to run your ICQ bot :(
 * Send Text Message
 * Edit Text Message
-* Send File
+* Send File (supports image and video)
 
 Let's make .Net the #1 client in ICQ New platform!
