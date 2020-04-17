@@ -11,3 +11,5 @@ Currently supports the following:
 * Send File (supports image and video)
 
 Let's make .Net the #1 client in ICQ New platform!
+
+NuGet package avaiable at https://www.nuget.org/packages/ICQ.Bot/1.0.0
