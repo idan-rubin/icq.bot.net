@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using ICQ.Bot.Args;
-using ICQ.Bot.Requests.Abstractions;
+﻿using ICQ.Bot.Args;
 using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using File = ICQ.Bot.Types.File;
 
 namespace ICQ.Bot
@@ -32,7 +30,6 @@ namespace ICQ.Bot
         event EventHandler<ReceiveErrorEventArgs> OnReceiveError;
         event EventHandler<ReceiveGeneralErrorEventArgs> OnReceiveGeneralError;
 
-        Task<TResponse> MakeRequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
         Task<bool> TestApiAsync(CancellationToken cancellationToken = default);
         void StartReceiving(UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default);
         void StopReceiving();
@@ -88,9 +85,6 @@ namespace ICQ.Bot
         /// <see href="https://icq.com/botapi/#/chats/get_chats_getAdmins"/>
         Task<ChatMember[]> GetChatAdministratorsAsync(ChatId chatId, CancellationToken cancellationToken = default);
 
-        /// <see href="https://icq.com/botapi/#/chats/get_chats_getMembers"/>
-        Task<int> GetChatMembersCountAsync(ChatId chatId, CancellationToken cancellationToken = default);
-
         /// <see href="https://icq.com/botapi/#/messages/get_messages_answerCallbackQuery"/>
         Task AnswerCallbackQueryAsync(
             string callbackQueryId,
@@ -115,10 +109,5 @@ namespace ICQ.Bot
             ChatId chatId,
             int messageId,
             CancellationToken cancellationToken = default);
-
-        //TODO: V2 :)
-        Task<File> GetInfoAndDownloadFileAsync(string fileId, Stream destination, CancellationToken cancellationToken = default);
-        Task SetChatPermissionsAsync(ChatId chatId, ChatPermissions permissions, CancellationToken cancellationToken = default);
-
     }
 }

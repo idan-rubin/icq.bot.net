@@ -21,6 +21,10 @@ namespace ICQ.Bot.Types
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string About { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool IsBot { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool Type { get; set; }
 
         /// <inheritdoc />
         public override int GetHashCode()

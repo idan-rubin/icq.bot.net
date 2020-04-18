@@ -11,9 +11,11 @@ namespace ICQ.Bot.Requests
         public ChatId ChatId { get; }
 
         public GetChatAdministratorsRequest(ChatId chatId)
-            : base("getChatAdministrators")
+            : base("chats/getAdminis")
         {
             ChatId = chatId;
+
+            QueryString = string.Format("?chatId={0}", ChatId);
         }
     }
 }
