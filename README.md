@@ -17,4 +17,4 @@ NuGet package avaiable at [nuget.org](https://www.nuget.org/packages/ICQ.Bot/1.0
 ## How do I ramp up?
 Usage is similar to the excellent .Net [Telegram.Bot ](https://github.com/TelegramBots/Telegram.Bot) project.
 
-### Let's make .Net the #1 client for ICQ bots!
+Let's make .Net the #1 client for ICQ bots!
