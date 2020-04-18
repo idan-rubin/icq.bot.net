@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ICQ.Bot.Requests.Abstractions;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace ICQ.Bot.Requests
 {

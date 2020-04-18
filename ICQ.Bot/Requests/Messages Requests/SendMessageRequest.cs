@@ -37,18 +37,19 @@ namespace ICQ.Bot.Requests
         public IReplyMarkup ReplyMarkup { get; set; }
 
         public SendMessageRequest(ChatId chatId, string text, IReplyMarkup replyMarkup)
-            : base("/messages/sendText", HttpMethod.Get)
+            : base("/messages/sendText", HttpMethod.Post)
         {
             ChatId = chatId;
             Text = text;
             ReplyMarkup = replyMarkup;
 
-            QueryString = string.Format("?chatId={0}&text={1}", ChatId, Text);
+            Parameters.Add("chatId", ChatId);
+            Parameters.Add("text", Text);
+
             if (ReplyMarkup != null)
             {
                 string markup = JsonConvert.SerializeObject(ReplyMarkup);
-                markup = HttpUtility.UrlEncode(markup);
-                QueryString = string.Format("{0}&inlineKeyboardMarkup={1}", QueryString, markup);
+                Parameters.Add("inlineKeyboardMarkup", markup);
             }
         }
     }

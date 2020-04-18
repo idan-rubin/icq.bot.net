@@ -335,12 +335,23 @@ namespace ICQ.Bot
                     }
 
                     url = string.Format("{0}{1}", url, queryString);
+                    if (_httpClient.DefaultRequestHeaders.Contains("Content-Type"))
+                    {
+                        _httpClient.DefaultRequestHeaders.Remove("Content-Type");
+                    }
+
                     httpResponse = await _httpClient.GetAsync(url).ConfigureAwait(false);
                 }
                 else if (request.Method == HttpMethod.Post)
                 {
                     request.Parameters.Add("token", _token);
                     var encodedContent = new FormUrlEncodedContent(request.Parameters);
+                    if (_httpClient.DefaultRequestHeaders.Contains("Content-Type"))
+                    {
+                        _httpClient.DefaultRequestHeaders.Remove("Content-Type");
+                        _httpClient.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+                    }
+
                     httpResponse = await _httpClient.PostAsync(url, encodedContent).ConfigureAwait(false);
                 }
                 else
