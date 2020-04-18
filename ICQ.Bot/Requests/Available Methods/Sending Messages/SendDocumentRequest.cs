@@ -40,12 +40,13 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public IReplyMarkup ReplyMarkup { get; set; }
 
-        public SendDocumentRequest(ChatId chatId, InputOnlineFile document, string caption)
+        public SendDocumentRequest(ChatId chatId, InputOnlineFile document, string caption, IReplyMarkup replyMarkup)
             : base("/messages/sendFile", HttpMethod.Post)
         {
             ChatId = chatId;
             Document = document;
             Caption = caption;
+            ReplyMarkup = replyMarkup;
 
             Parameters.Add("chatId", ChatId);
             Parameters.Add("fileId", Document.FileId);
@@ -54,32 +55,12 @@ namespace ICQ.Bot.Requests
             {
                 Parameters.Add("caption", Caption);
             }
-        }
 
-        public override HttpContent ToHttpContent()
-        {
-            HttpContent httpContent;
-            if (Document.FileType == FileType.Stream || Thumb?.FileType == FileType.Stream)
+            if (ReplyMarkup != null)
             {
-                var multipartContent = GenerateMultipartFormDataContent("document", "thumb");
-                if (Document.FileType == FileType.Stream)
-                {
-                    multipartContent.AddStreamContent(Document.Content, "document", Document.FileName);
-                }
-
-                if (Thumb?.FileType == FileType.Stream)
-                {
-                    multipartContent.AddStreamContent(Thumb.Content, "thumb", Thumb.FileName);
-                }
-
-                httpContent = multipartContent;
+                string markup = JsonConvert.SerializeObject(ReplyMarkup);
+                Parameters.Add("inlineKeyboardMarkup", markup);
             }
-            else
-            {
-                httpContent = base.ToHttpContent();
-            }
-
-            return httpContent;
         }
     }
 }

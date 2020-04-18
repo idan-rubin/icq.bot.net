@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>idan-rubin</Authors>
     <Company>idan-rubin</Company>
-    <Description>a C# wrapper for ICQ Bot APIs</Description>
+    <Description>C# wrapper for ICQ Bot APIs</Description>
     <Copyright />
     <RepositoryUrl>https://github.com/idan-rubin/icq.bot</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
@@ -13,6 +13,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RootNamespace>ICQ.Bot</RootNamespace>
     <AssemblyName>ICQ.Bot</AssemblyName>
+    <PackageTags>icq;bot</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

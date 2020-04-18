@@ -32,14 +32,21 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
 
-        public EditMessageTextRequest(ChatId chatId, int messageId, string text)
+        public EditMessageTextRequest(ChatId chatId, int messageId, string text, InlineKeyboardMarkup replyMarkup)
             : base("/messages/editText", HttpMethod.Get)
         {
             ChatId = chatId;
             MessageId = messageId;
+            ReplyMarkup = replyMarkup;
             Text = HttpUtility.UrlEncode(text);
 
             QueryString = string.Format("?chatId={0}&mgsId={1}&text={2}", ChatId, MessageId, Text);
+            if (ReplyMarkup != null)
+            {
+                string markup = JsonConvert.SerializeObject(ReplyMarkup);
+                markup = HttpUtility.UrlEncode(markup);
+                QueryString = string.Format("{0}&inlineKeyboardMarkup={1}", QueryString, markup);
+            }
         }
     }
 }

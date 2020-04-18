@@ -100,11 +100,10 @@ namespace ICQ.Bot
             InlineKeyboardMarkup replyMarkup = default,
             CancellationToken cancellationToken = default
         ) =>
-            MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
+            MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text, replyMarkup)
             {
                 ParseMode = parseMode,
-                DisableWebPagePreview = disableWebPagePreview,
-                ReplyMarkup = replyMarkup
+                DisableWebPagePreview = disableWebPagePreview
             }, cancellationToken);
 
         public Task<ChatMember[]> GetChatAdministratorsAsync(
@@ -219,17 +218,17 @@ namespace ICQ.Bot
             {
                 if (request.Method == HttpMethod.Get)
                 {
-                    if (!string.IsNullOrWhiteSpace(request.QueryString))
+                    string queryString;
+                    if (string.IsNullOrWhiteSpace(request.QueryString))
                     {
-                        var queryString = request.QueryString.Replace("?", String.Empty);
-                        queryString = string.Format("?token={0}&{1}", _token, queryString);
-                        url = string.Format("{0}{1}", url, queryString);
+                        queryString = request.QueryString.Replace("?{0}", _token);
                     }
                     else
                     {
-                        url = string.Format("?token={0}", _token);
+                        queryString = string.Format("{0}&token={0}", _token);
                     }
 
+                    url = string.Format("{0}{1}", url, queryString);
                     httpResponse = await _httpClient.GetAsync(url).ConfigureAwait(false);
                 }
                 else if (request.Method == HttpMethod.Post)
@@ -305,13 +304,12 @@ namespace ICQ.Bot
             InputMedia thumb = default,
             CancellationToken cancellationToken = default
         ) =>
-            MakeRequestAsync(new SendDocumentRequest(chatId, document, caption)
+            MakeRequestAsync(new SendDocumentRequest(chatId, document, caption, replyMarkup)
             {
                 Thumb = thumb,
                 ParseMode = parseMode,
                 DisableNotification = disableNotification,
-                ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
+                ReplyToMessageId = replyToMessageId
             }, cancellationToken);
 
         public Task<MessagesResponse> SendTextMessageAsync(
@@ -324,13 +322,12 @@ namespace ICQ.Bot
         IReplyMarkup replyMarkup = default,
         CancellationToken cancellationToken = default
     ) =>
-        MakeRequestAsync(new SendMessageRequest(chatId, text)
+        MakeRequestAsync(new SendMessageRequest(chatId, text, replyMarkup)
         {
             ParseMode = parseMode,
             DisableWebPagePreview = disableWebPagePreview,
             DisableNotification = disableNotification,
-            ReplyToMessageId = replyToMessageId,
-            ReplyMarkup = replyMarkup
+            ReplyToMessageId = replyToMessageId
         }, cancellationToken);
 
         public Task SetChatPermissionsAsync(

@@ -15,15 +15,6 @@ namespace ICQ.Bot.Types.ReplyMarkups
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string CallbackData { get; set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string SwitchInlineQuery { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string SwitchInlineQueryCurrentChat { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool Pay { get; set; }
-
         public static InlineKeyboardButton WithUrl(string text, string url) =>
             new InlineKeyboardButton
             {
@@ -44,28 +35,6 @@ namespace ICQ.Bot.Types.ReplyMarkups
                 Text = text,
                 CallbackData = callbackData
             };
-
-        public static InlineKeyboardButton WithSwitchInlineQuery(string text, string query = "") =>
-            new InlineKeyboardButton
-            {
-                Text = text,
-                SwitchInlineQuery = query
-            };
-
-        public static InlineKeyboardButton WithSwitchInlineQueryCurrentChat(string text, string query = "") =>
-            new InlineKeyboardButton
-            {
-                Text = text,
-                SwitchInlineQueryCurrentChat = query
-            };
-
-        public static InlineKeyboardButton WithPayment(string text) =>
-            new InlineKeyboardButton
-            {
-                Text = text,
-                Pay = true
-            };
-
 
         public static implicit operator InlineKeyboardButton(string textAndCallbackData) =>
             textAndCallbackData == null

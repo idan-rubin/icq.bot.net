@@ -5,8 +5,8 @@ using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.ReplyMarkups;
 using System.Net.Http;
+using System.Web;
 
-// ReSharper disable once CheckNamespace
 namespace ICQ.Bot.Requests
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
@@ -36,13 +36,20 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public IReplyMarkup ReplyMarkup { get; set; }
 
-        public SendMessageRequest(ChatId chatId, string text)
+        public SendMessageRequest(ChatId chatId, string text, IReplyMarkup replyMarkup)
             : base("/messages/sendText", HttpMethod.Get)
         {
             ChatId = chatId;
             Text = text;
+            ReplyMarkup = replyMarkup;
 
             QueryString = string.Format("?chatId={0}&text={1}", ChatId, Text);
+            if (ReplyMarkup != null)
+            {
+                string markup = JsonConvert.SerializeObject(ReplyMarkup);
+                markup = HttpUtility.UrlEncode(markup);
+                QueryString = string.Format("{0}&inlineKeyboardMarkup={1}", QueryString, markup);
+            }
         }
     }
 }

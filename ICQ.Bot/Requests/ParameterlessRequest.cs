@@ -16,9 +16,5 @@ namespace ICQ.Bot.Requests
             : base(methodName, method)
         {
         }
-
-        public override HttpContent ToHttpContent() => IsWebhookResponse
-            ? base.ToHttpContent()
-            : null;
     }
 }

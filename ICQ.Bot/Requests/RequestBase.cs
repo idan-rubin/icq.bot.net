@@ -39,12 +39,5 @@ namespace ICQ.Bot.Requests
             string payload = JsonConvert.SerializeObject(this);
             return new StringContent(payload, Encoding.UTF8, "application/json");
         }
-
-        [JsonIgnore]
-        public bool IsWebhookResponse { get; set; }
-
-
-        [JsonProperty("method", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        internal string WebHookMethodName => IsWebhookResponse ? MethodName : default;
     }
 }
