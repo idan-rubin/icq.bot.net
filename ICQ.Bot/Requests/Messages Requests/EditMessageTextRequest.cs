@@ -40,7 +40,7 @@ namespace ICQ.Bot.Requests
             ReplyMarkup = replyMarkup;
 
             Parameters.Add("chatId", ChatId);
-            Parameters.Add("mggId", MessageId.ToString());
+            Parameters.Add("msgId", MessageId.ToString());
             Parameters.Add("text", Text);
 
             if (ReplyMarkup != null)
