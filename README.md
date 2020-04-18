@@ -2,7 +2,7 @@
 
 C# wrapper for ICQ Bot APIs. Inspired by [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot)
 
-No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 3.1 and Json.Net.
+No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 3.1 and Json.Net
 
 ## What's in it for me?
 With this package you can:
