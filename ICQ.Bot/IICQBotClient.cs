@@ -40,7 +40,7 @@ namespace ICQ.Bot
             int timeout = default,
             IEnumerable<UpdateType> allowedUpdates = default,
             CancellationToken cancellationToken = default);
-        
+
         /// <see href="https://icq.com/botapi/#/self/get_self_get"/>
         Task<User> GetMeAsync(CancellationToken cancellationToken = default);
 
