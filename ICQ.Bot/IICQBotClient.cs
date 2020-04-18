@@ -96,11 +96,11 @@ namespace ICQ.Bot
         /// <see href="https://icq.com/botapi/#/messages/get_messages_deleteMessages"/>
         Task DeleteMessagesAsync(
             ChatId chatId,
-            int messageId,
+            IEnumerable<int> messageId,
             CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/chats/get_chats_sendActions"/>
-        Task SendChatActionAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default);
+        Task SendChatActionsAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/files/get_files_getInfo"/>
         Task<Types.File> GetFileInfoAsync(string fileId, CancellationToken cancellationToken = default);

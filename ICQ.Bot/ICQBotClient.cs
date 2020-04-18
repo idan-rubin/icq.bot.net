@@ -183,19 +183,18 @@ namespace ICQ.Bot
 )        =>
             MakeRequestAsync(new GetFileInfoRequest(fileId), cancellationToken);
 
-        //TODO: implement
-        public Task DeleteMessagesAsync(ChatId chatId,
-            int messageId,
-            CancellationToken cancellationToken = default
-        ) =>
-              throw new NotImplementedException();
-
-        public Task SendChatActionAsync(
+        public Task SendChatActionsAsync(
             ChatId chatId,
             ChatAction chatAction,
             CancellationToken cancellationToken = default
         ) =>
-            throw new NotImplementedException();
+            MakeRequestAsync(new SendChatActionsRequest(chatId, chatAction), cancellationToken);
+
+        public Task DeleteMessagesAsync(ChatId chatId,
+            IEnumerable<int> messageIds,
+            CancellationToken cancellationToken = default
+        ) =>
+              MakeRequestAsync(new DeleteMessageRequest(chatId, messageIds), cancellationToken);
 
         public void StartReceiving(UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default)
         {
