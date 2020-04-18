@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ICQ.Bot.Types;
+using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {
@@ -8,7 +9,7 @@ namespace ICQ.Bot.Requests
     public class GetMyCommandsRequest : RequestBase<BotCommand[]>
     {
         public GetMyCommandsRequest()
-            : base("getMyCommands")
+            : base("getMyCommands", HttpMethod.Get)
         { }
     }
 }

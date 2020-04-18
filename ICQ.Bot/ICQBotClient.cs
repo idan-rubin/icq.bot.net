@@ -120,11 +120,8 @@ namespace ICQ.Bot
             int cacheTime = default,
             CancellationToken cancellationToken = default
         ) =>
-            MakeRequestAsync(new AnswerCallbackQueryRequest(callbackQueryId)
+            MakeRequestAsync(new AnswerCallbackQueryRequest(callbackQueryId, text, showAlert, url)
             {
-                Text = text,
-                ShowAlert = showAlert,
-                Url = url,
                 CacheTime = cacheTime
             }, cancellationToken);
 
@@ -168,6 +165,24 @@ namespace ICQ.Bot
         ) =>
             MakeRequestAsync(new UnbanChatMemberRequest(chatId, userId), cancellationToken);
 
+        public Task<ChatAdmins> GetChatAdministratorsAsync(
+            ChatId chatId,
+            CancellationToken cancellationToken = default
+        ) =>
+            MakeRequestAsync(new GetChatAdministratorsRequest(chatId), cancellationToken);
+
+        public Task<ChatInfo> GetChatAsync(
+            ChatId chatId,
+            CancellationToken cancellationToken = default
+        ) =>
+            MakeRequestAsync(new GetChatRequest(chatId), cancellationToken);
+
+        public Task<Types.File> GetFileInfoAsync(
+            string fileId,
+            CancellationToken cancellationToken = default
+)        =>
+            MakeRequestAsync(new GetFileInfoRequest(fileId), cancellationToken);
+
         //TODO: implement
         public Task DeleteMessagesAsync(ChatId chatId,
             int messageId,
@@ -175,27 +190,9 @@ namespace ICQ.Bot
         ) =>
               throw new NotImplementedException();
 
-        public Task<ChatMember[]> GetChatAdministratorsAsync(
-            ChatId chatId,
-            CancellationToken cancellationToken = default
-        ) =>
-            throw new NotImplementedException();
-
-        public Task<Chat> GetChatAsync(
-            ChatId chatId,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new GetChatRequest(chatId), cancellationToken);
-
         public Task SendChatActionAsync(
             ChatId chatId,
             ChatAction chatAction,
-            CancellationToken cancellationToken = default
-        ) =>
-            throw new NotImplementedException();
-
-        public Task<Types.File> GetFileAsync(
-            string fileId,
             CancellationToken cancellationToken = default
         ) =>
             throw new NotImplementedException();

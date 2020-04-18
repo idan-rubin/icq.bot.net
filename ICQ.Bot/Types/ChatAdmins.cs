@@ -1,15 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 
 namespace ICQ.Bot.Types
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class ChatMember
+    public class ChatAdmins
     {
-        [JsonProperty(Required = Required.Always)]
-        public long UserId { get; set; }
-
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool Creator { get; set; }
+        public IEnumerable<ChatMember> Admins { get; set; }
     }
 }

@@ -13,10 +13,6 @@ namespace ICQ.Bot.Requests
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public abstract class FileRequestBase<TResponse> : RequestBase<TResponse>
     {
-        protected FileRequestBase(string methodName)
-            : base(methodName)
-        { }
-
         protected FileRequestBase(string methodName, HttpMethod method)
             : base(methodName, method)
         { }

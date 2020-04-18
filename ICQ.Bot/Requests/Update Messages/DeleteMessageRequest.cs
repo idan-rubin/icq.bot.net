@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ICQ.Bot.Types;
+using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {
@@ -14,7 +15,7 @@ namespace ICQ.Bot.Requests
         public int MessageId { get; }
 
         public DeleteMessageRequest(ChatId chatId, int messageId)
-            : base("deleteMessage")
+            : base("deleteMessage", HttpMethod.Get)
         {
             ChatId = chatId;
             MessageId = messageId;

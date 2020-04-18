@@ -7,6 +7,15 @@ namespace ICQ.Bot.Types
     public class File : FileBase
     {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string FilePath { get; set; }
+        public string Type { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Size { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string FileName { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Url { get; set; }
     }
 }

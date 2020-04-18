@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
+using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {
@@ -15,7 +16,7 @@ namespace ICQ.Bot.Requests
         public ChatAction Action { get; }
 
         public SendChatActionRequest(ChatId chatId, ChatAction action)
-            : base("sendChatAction")
+            : base("sendChatAction", HttpMethod.Get)
         {
             ChatId = chatId;
             Action = action;

@@ -23,10 +23,6 @@ namespace ICQ.Bot.Requests
         //https://stackoverflow.com/questions/27376133/c-httpclient-with-post-parameters
         public Dictionary<string, string> Parameters { get; protected set; }
 
-        protected RequestBase(string methodName)
-            : this(methodName, HttpMethod.Post)
-        { }
-
         protected RequestBase(string methodName, HttpMethod method)
         {
             MethodName = methodName;

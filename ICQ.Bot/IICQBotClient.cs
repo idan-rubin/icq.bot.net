@@ -35,7 +35,11 @@ namespace ICQ.Bot
         void StopReceiving();
 
         /// <see href="https://icq.com/botapi/#/events/get_events_get"/>
-        Task<Updates> GetUpdatesAsync(int offset = default, int limit = default, int timeout = default, IEnumerable<UpdateType> allowedUpdates = default, CancellationToken cancellationToken = default);
+        Task<Updates> GetUpdatesAsync(int offset = default,
+            int limit = default,
+            int timeout = default,
+            IEnumerable<UpdateType> allowedUpdates = default,
+            CancellationToken cancellationToken = default);
         
         /// <see href="https://icq.com/botapi/#/self/get_self_get"/>
         Task<User> GetMeAsync(CancellationToken cancellationToken = default);
@@ -51,6 +55,16 @@ namespace ICQ.Bot
             IReplyMarkup replyMarkup = default,
             CancellationToken cancellationToken = default);
 
+        /// <see href="https://icq.com/botapi/#/messages/get_messages_editText"/>
+        Task<MessagesResponse> EditMessageTextAsync(
+            ChatId chatId,
+            int messageId,
+            string text,
+            ParseMode parseMode = default,
+            bool disableWebPagePreview = default,
+            InlineKeyboardMarkup replyMarkup = default,
+            CancellationToken cancellationToken = default);
+
         /// <see href="https://icq.com/botapi/#/messages/get_messages_sendFile"/>
         Task<MessagesResponse> SendFileAsync(
             ChatId chatId,
@@ -63,27 +77,12 @@ namespace ICQ.Bot
             InputMedia thumb = default,
             CancellationToken cancellationToken = default);
 
-        /// <see href="https://icq.com/botapi/#/chats/get_chats_sendActions"/>
-        Task SendChatActionAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default);
-
-        /// <see href="https://icq.com/botapi/#/files/get_files_getInfo"/>
-        Task<File> GetFileAsync(string fileId, CancellationToken cancellationToken = default);
-
         /// <see href="https://icq.com/botapi/#/chats/get_chats_blockUser"/>
         Task KickChatMemberAsync(
             ChatId chatId,
             int userId,
             DateTime untilDate = default,
             CancellationToken cancellationToken = default);
-
-        /// <see href="https://icq.com/botapi/#/chats/get_chats_unblockUser"/>
-        Task UnbanChatMemberAsync(ChatId chatId, int userId, CancellationToken cancellationToken = default);
-
-        /// <see href="https://icq.com/botapi/#/chats/get_chats_getInfo"/>
-        Task<Chat> GetChatAsync(ChatId chatId, CancellationToken cancellationToken = default);
-
-        /// <see href="https://icq.com/botapi/#/chats/get_chats_getAdmins"/>
-        Task<ChatMember[]> GetChatAdministratorsAsync(ChatId chatId, CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/messages/get_messages_answerCallbackQuery"/>
         Task AnswerCallbackQueryAsync(
@@ -94,20 +93,25 @@ namespace ICQ.Bot
             int cacheTime = default,
             CancellationToken cancellationToken = default);
 
-        /// <see href="https://icq.com/botapi/#/messages/get_messages_editText"/>
-        Task<MessagesResponse> EditMessageTextAsync(
-            ChatId chatId,
-            int messageId,
-            string text,
-            ParseMode parseMode = default,
-            bool disableWebPagePreview = default,
-            InlineKeyboardMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default);
-
         /// <see href="https://icq.com/botapi/#/messages/get_messages_deleteMessages"/>
         Task DeleteMessagesAsync(
             ChatId chatId,
             int messageId,
             CancellationToken cancellationToken = default);
+
+        /// <see href="https://icq.com/botapi/#/chats/get_chats_sendActions"/>
+        Task SendChatActionAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default);
+
+        /// <see href="https://icq.com/botapi/#/files/get_files_getInfo"/>
+        Task<Types.File> GetFileInfoAsync(string fileId, CancellationToken cancellationToken = default);
+
+        /// <see href="https://icq.com/botapi/#/chats/get_chats_unblockUser"/>
+        Task UnbanChatMemberAsync(ChatId chatId, int userId, CancellationToken cancellationToken = default);
+
+        /// <see href="https://icq.com/botapi/#/chats/get_chats_getInfo"/>
+        Task<ChatInfo> GetChatAsync(ChatId chatId, CancellationToken cancellationToken = default);
+
+        /// <see href="https://icq.com/botapi/#/chats/get_chats_getAdmins"/>
+        Task<ChatAdmins> GetChatAdministratorsAsync(ChatId chatId, CancellationToken cancellationToken = default);
     }
 }
