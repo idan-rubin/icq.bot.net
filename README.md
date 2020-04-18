@@ -12,7 +12,7 @@ With this package you can:
 * Send File (supports image and video)
 
 ## How do I get it?
-NuGet package avaiable at [nuget.org](https://www.nuget.org/packages/ICQ.Bot/1.0.3)
+NuGet package is avaiable at [nuget.org](https://www.nuget.org/packages/ICQ.Bot/1.0.3)
 
 ## How do I ramp up?
 Usage is similar to the excellent .Net [Telegram.Bot ](https://github.com/TelegramBots/Telegram.Bot) project.
