@@ -11,7 +11,7 @@ With this package you can:
 * Edit Text Message
 * Send File (supports image and video)
 
-## Where do I install it?
+## How do I get it?
 NuGet package avaiable at [nuget.org](https://www.nuget.org/packages/ICQ.Bot/1.0.0)
 
 ## How do I ramp up?
