@@ -7,9 +7,9 @@ No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 
 ## What's in it for me?
 With this package you can:
 * Get Bot Events - polling is currently the only way to get events from ICQ :(
-* Send Text Message
-* Edit Text Message
-* Send File (supports image and video)
+* Send Text Messages
+* Edit Text Messages
+* Send Files (supports image and video)
 
 ## How do I get it?
 NuGet package is avaiable at [nuget.org](https://www.nuget.org/packages/ICQ.Bot/1.0.3)
