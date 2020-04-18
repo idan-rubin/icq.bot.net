@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ICQ.Bot.Converters;
+using System.Web;
 
 namespace ICQ.Bot.Types
 {
@@ -32,6 +33,11 @@ namespace ICQ.Bot.Types
             else if (long.TryParse(username, out long identifier))
             {
                 Identifier = identifier;
+            }
+
+            if (!string.IsNullOrWhiteSpace(Username))
+            {
+                Username = HttpUtility.UrlEncode(Username);
             }
         }
 

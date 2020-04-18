@@ -22,7 +22,7 @@ namespace ICQ.Bot.Requests
             Action = action;
 
             string tempAction = Action.ToString();
-            string newAction = char.ToLower(tempAction[0]) + tempAction.Substring(1);
+            string newAction = string.Format("{0}{1}", char.ToLower(tempAction[0]), tempAction.Substring(1));
             QueryString = string.Format("?chatId={0}&actions=[{1}]", ChatId, newAction);
         }
     }
