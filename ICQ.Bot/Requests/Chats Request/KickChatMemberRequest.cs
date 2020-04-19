@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using ICQ.Bot.Types;
 using System.Net.Http;
+using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -25,8 +26,12 @@ namespace ICQ.Bot.Requests
         {
             ChatId = chatId;
             UserId = userId;
+        }
 
-            QueryString = string.Format("?chatId={0}&userId={1}", ChatId, UserId);
+        public override HttpContent ToHttpContent()
+        {
+            string queryString = string.Format("chatId={0}&userId={1}", ChatId, UserId);
+            return new StringContent(queryString, Encoding.UTF8);
         }
     }
 }

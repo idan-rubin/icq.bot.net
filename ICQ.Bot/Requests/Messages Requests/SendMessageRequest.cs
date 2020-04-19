@@ -6,6 +6,8 @@ using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.ReplyMarkups;
 using System.Net.Http;
 using System.Web;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -37,20 +39,23 @@ namespace ICQ.Bot.Requests
         public IReplyMarkup ReplyMarkup { get; set; }
 
         public SendMessageRequest(ChatId chatId, string text, IReplyMarkup replyMarkup)
-            : base("/messages/sendText", HttpMethod.Post)
+            : base("/messages/sendText", HttpMethod.Get)
         {
             ChatId = chatId;
             Text = text;
             ReplyMarkup = replyMarkup;
+        }
 
-            Parameters.Add("chatId", ChatId);
-            Parameters.Add("text", Text);
-
+        public override HttpContent ToHttpContent()
+        {
+            string queryString = string.Format("chatId={0}&text={1}", ChatId, Text);
             if (ReplyMarkup != null)
             {
                 string markup = JsonConvert.SerializeObject(ReplyMarkup);
-                Parameters.Add("inlineKeyboardMarkup", markup);
+                queryString = string.Format("{0}&inlineKeyboardMarkup={1}", queryString, markup);
             }
+
+            return new StringContent(queryString, Encoding.UTF8);
         }
     }
 }

@@ -7,8 +7,6 @@ namespace ICQ.Bot.Requests.Abstractions
     {
         HttpMethod Method { get; }
         string MethodName { get; }
-        string QueryString { get; }
-        Dictionary<string, string> Parameters { get; }
         HttpContent ToHttpContent();
     }
 }

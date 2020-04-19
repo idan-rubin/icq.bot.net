@@ -2,6 +2,7 @@ using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http;
+using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -19,7 +20,12 @@ namespace ICQ.Bot.Requests
         {
             Offset = offset;
             Timeout = timeout;
-            QueryString = string.Format("?lastEventId={0}&pollTime={1}", Offset, Timeout);
+        }
+
+        public override HttpContent ToHttpContent()
+        {
+            string queryString = string.Format("lastEventId={0}&pollTime={1}", Offset, Timeout);
+            return new StringContent(queryString, Encoding.UTF8);
         }
     }
 }

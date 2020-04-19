@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 
 namespace ICQ.Bot.Requests
@@ -31,19 +32,23 @@ namespace ICQ.Bot.Requests
             Text = text;
             ShowAlert = showAlert;
             Url = url;
+        }
 
-            Text = HttpUtility.UrlEncode(Text);
-            QueryString = string.Format("?queryId={0}&text={1}", QueryId, Text);
+        public override HttpContent ToHttpContent()
+        {
+            string queryString = string.Format("queryId={0}&text={1}", QueryId, Text);
             if (ShowAlert)
             {
-                QueryString = string.Format("{0}&showAlert=true", QueryString);
+                queryString = string.Format("{0}&showAlert=true", queryString);
             }
 
             if (!string.IsNullOrWhiteSpace(Url))
             {
                 Url = HttpUtility.UrlEncode(Url);
-                QueryString = string.Format("{0}&url={1}", QueryString, Url);
+                queryString = string.Format("{0}&url={1}", queryString, Url);
             }
+
+            return new StringContent(queryString, Encoding.UTF8);
         }
     }
 }

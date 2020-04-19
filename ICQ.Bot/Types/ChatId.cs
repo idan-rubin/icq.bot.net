@@ -22,7 +22,7 @@ namespace ICQ.Bot.Types
 
         public ChatId(string username)
         {
-            if (username.Length > 1 && username.Substring(0, 1) == "@")
+            if (!string.IsNullOrWhiteSpace(username))
             {
                 Username = username;
             }

@@ -5,7 +5,7 @@ using ICQ.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http;
-using System.Web;
+using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -33,21 +33,23 @@ namespace ICQ.Bot.Requests
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
 
         public EditMessageTextRequest(ChatId chatId, int messageId, string text, InlineKeyboardMarkup replyMarkup)
-            : base("/messages/editText", HttpMethod.Post)
+            : base("/messages/editText", HttpMethod.Get)
         {
             ChatId = chatId;
             MessageId = messageId;
             ReplyMarkup = replyMarkup;
+        }
 
-            Parameters.Add("chatId", ChatId);
-            Parameters.Add("msgId", MessageId.ToString());
-            Parameters.Add("text", Text);
-
+        public override HttpContent ToHttpContent()
+        {
+            string queryString = string.Format("chatId={0}&msgId={1}&text={2}", ChatId, MessageId, Text);
             if (ReplyMarkup != null)
             {
                 string markup = JsonConvert.SerializeObject(ReplyMarkup);
-                Parameters.Add("inlineKeyboardMarkup", markup);
+                queryString = string.Format("{0}&inlineKeyboardMarkup={1}", queryString, markup);
             }
+
+            return new StringContent(queryString, Encoding.UTF8);
         }
     }
 }

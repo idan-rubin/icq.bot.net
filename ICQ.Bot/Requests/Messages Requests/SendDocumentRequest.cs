@@ -7,6 +7,7 @@ using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
+using System.Collections.Generic;
 
 namespace ICQ.Bot.Requests
 {
@@ -47,20 +48,31 @@ namespace ICQ.Bot.Requests
             Document = document;
             Caption = caption;
             ReplyMarkup = replyMarkup;
+        }
 
-            Parameters.Add("chatId", ChatId);
-            Parameters.Add("fileId", Document.FileId);
+        public override HttpContent ToHttpContent()
+        {
+            //https://stackoverflow.com/questions/27376133/c-httpclient-with-post-parameters
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("chatId", ChatId);
+            if (Document != null)
+            {
+                parameters.Add("fileId", Document.FileId);
+            }
 
             if (!string.IsNullOrWhiteSpace(Caption))
             {
-                Parameters.Add("caption", Caption);
+                parameters.Add("caption", Caption);
             }
 
             if (ReplyMarkup != null)
             {
                 string markup = JsonConvert.SerializeObject(ReplyMarkup);
-                Parameters.Add("inlineKeyboardMarkup", markup);
+                parameters.Add("inlineKeyboardMarkup", markup);
             }
+
+            var encodedContent = new FormUrlEncodedContent(parameters);
+            return encodedContent;
         }
     }
 }

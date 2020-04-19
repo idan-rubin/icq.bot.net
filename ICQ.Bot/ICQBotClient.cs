@@ -12,8 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ICQ.Bot
 {
@@ -322,26 +324,28 @@ namespace ICQ.Bot
             HttpResponseMessage httpResponse;
             try
             {
+                HttpContent encodedContent = request.ToHttpContent();
+                string queryString;
+                if (encodedContent != null)
+                {
+                    string prefix = await encodedContent.ReadAsStringAsync();
+                    prefix = HttpUtility.UrlDecode(prefix);
+                    queryString = string.Format("{0}&token={1}", prefix, _token);
+                }
+                else
+                {
+                    queryString = string.Format("token={0}", _token);
+                }
+
                 if (request.Method == HttpMethod.Get)
                 {
-                    string queryString;
-                    if (string.IsNullOrWhiteSpace(request.QueryString))
-                    {
-                        queryString = request.QueryString.Replace("?{0}", _token);
-                    }
-                    else
-                    {
-                        queryString = string.Format("{0}&token={0}", _token);
-                    }
-
-                    url = string.Format("{0}{1}", url, queryString);
+                    url = string.Format("{0}?{1}", url, queryString);
                     httpResponse = await _httpClient.GetAsync(url).ConfigureAwait(false);
                 }
                 else if (request.Method == HttpMethod.Post)
                 {
-                    request.Parameters.Add("token", _token);
-                    var encodedContent = new FormUrlEncodedContent(request.Parameters);
-                    httpResponse = await _httpClient.PostAsync(url, encodedContent).ConfigureAwait(false);
+                    HttpContent newEncodedContent = new StringContent(queryString, Encoding.UTF8, "application/x-www-form-urlencoded");
+                    httpResponse = await _httpClient.PostAsync(url, newEncodedContent).ConfigureAwait(false);
                 }
                 else
                 {

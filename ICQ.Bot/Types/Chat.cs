@@ -7,7 +7,7 @@ namespace ICQ.Bot.Types
     public class Chat
     {
         [JsonProperty(Required = Required.Always)]
-        public long ChatId { get; set; }
+        public ChatId ChatId { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public string Type { get; set; }

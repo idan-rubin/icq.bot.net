@@ -17,18 +17,10 @@ namespace ICQ.Bot.Requests
         [JsonIgnore]
         public string MethodName { get; protected set; }
 
-        [JsonIgnore]
-        public string QueryString { get; protected set; }
-
-        [JsonIgnore]
-        //https://stackoverflow.com/questions/27376133/c-httpclient-with-post-parameters
-        public Dictionary<string, string> Parameters { get; protected set; }
-
         protected RequestBase(string methodName, HttpMethod method)
         {
             MethodName = methodName;
             Method = method;
-            Parameters = new Dictionary<string, string>();
         }
 
         public virtual HttpContent ToHttpContent()
