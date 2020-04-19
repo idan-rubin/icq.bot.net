@@ -1,6 +1,6 @@
 # icq.bot.net
 
-C# wrapper for ICQ Bot APIs. Inspired by [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot)
+C# wrapper for ICQ Bot APIs. Inspired by [Telegram.Bot]
 
 No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 3.1 and Json.Net
 
@@ -12,13 +12,12 @@ With this package you can:
 * Send Files (supports image and video)
 
 ## How do I get it?
-NuGet package is avaiable at [nuget.org](https://www.nuget.org/packages/ICQ.Bot)
+NuGet package is avaiable at [nuget.org]
 
 ## How do I ramp up?
-Usage is similar to the excellent .Net [Telegram.Bot ](https://github.com/TelegramBots/Telegram.Bot) project.
-
-Simple Echo Bot:
-<pre><code>This is a code block.
-</code></pre>
+Usage is similar to the excellent .Net [Telegram.Bot] project.
 
 Let's make .Net the #1 client for ICQ bots!
+
+[nuget.org]: https://www.nuget.org/packages/ICQ.Bot
+[Telegram.Bot]: https://github.com/TelegramBots/Telegram.Bot
