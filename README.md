@@ -1,3 +1,5 @@
+[![package](https://img.shields.io/badge/ICQ.Bot-v1.0.5-blue)](https://www.nuget.org/packages/ICQ.Bot)
+
 # icq.bot.net
 
 C# wrapper for ICQ Bot APIs. Inspired by [Telegram.Bot]
