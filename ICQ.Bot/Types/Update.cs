@@ -4,20 +4,29 @@ using System;
 
 namespace ICQ.Bot.Types
 {
+    public enum UpdateType
+    {
+        NewMesssage,
+        EditedMessage,
+        DeletedMessage,
+        PinnedMessage,
+        UnpinnedMessage,
+        NewChatMembers,
+        LeftChatMembers,
+        CallbackQuery,
+    }
+
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class Update
     {
         [JsonProperty(Required = Required.Always)]
         public int EventId { get; set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonProperty(Required = Required.Always)]
         public string Type { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public Message Payload { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public MessageEntity[] Parts { get; set; }
+        public UpdatePayload Payload { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public DateTime EditedTimestamp { get; set; }

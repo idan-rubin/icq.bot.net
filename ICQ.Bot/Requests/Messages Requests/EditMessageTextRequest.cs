@@ -32,12 +32,12 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
 
-        public EditMessageTextRequest(ChatId chatId, int messageId, string text, InlineKeyboardMarkup replyMarkup)
+        public EditMessageTextRequest(ChatId chatId, int messageId, string text)
             : base("/messages/editText", HttpMethod.Get)
         {
             ChatId = chatId;
             MessageId = messageId;
-            ReplyMarkup = replyMarkup;
+            Text = text;
         }
 
         public override HttpContent ToHttpContent()

@@ -1,20 +1,23 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
 
 namespace ICQ.Bot.Types
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class Message
+    public class UpdatePayload
     {
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public long MsgId { get; set; }
-
+        //shared fields
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public Chat Chat { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public User From { get; set; }
+
+        //message fields
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public long MsgId { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public DateTime Timestamp { get; set; }
@@ -22,13 +25,14 @@ namespace ICQ.Bot.Types
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Text { get; set; }
 
+        //Callback Query fields
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string Caption { get; set; }
+        public string QueryId { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string FileId { get; set; }
+        public Update Message { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string FileType { get; set; }
+        public IEnumerable<PayloadPart> Parts { get; set; }
     }
 }

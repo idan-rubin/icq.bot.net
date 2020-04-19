@@ -31,14 +31,14 @@ namespace ICQ.Bot
         event EventHandler<ReceiveGeneralErrorEventArgs> OnReceiveGeneralError;
 
         Task<bool> TestApiAsync(CancellationToken cancellationToken = default);
-        void StartReceiving(UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default);
+        void StartReceiving(Types.Enums.UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default);
         void StopReceiving();
 
         /// <see href="https://icq.com/botapi/#/events/get_events_get"/>
         Task<Updates> GetUpdatesAsync(int offset = default,
             int limit = default,
             int timeout = default,
-            IEnumerable<UpdateType> allowedUpdates = default,
+            IEnumerable<Types.Enums.UpdateType> allowedUpdates = default,
             CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/self/get_self_get"/>

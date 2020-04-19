@@ -75,10 +75,9 @@ namespace ICQ.Bot
             int offset = default,
             int limit = default,
             int timeout = default,
-            IEnumerable<UpdateType> allowedUpdates = default,
+            IEnumerable<Types.Enums.UpdateType> allowedUpdates = default,
             CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new GetUpdatesRequest(offset, timeout), cancellationToken);
+        ) => MakeRequestAsync(new GetUpdatesRequest(offset, timeout), cancellationToken);
 
         public Task<MessagesResponse> SendTextMessageAsync(
             ChatId chatId,
@@ -89,14 +88,14 @@ namespace ICQ.Bot
             int replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new SendMessageRequest(chatId, text, replyMarkup)
-            {
-                ParseMode = parseMode,
-                DisableWebPagePreview = disableWebPagePreview,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyToMessageId
-            }, cancellationToken);
+        ) => MakeRequestAsync(new SendMessageRequest(chatId, text)
+                {
+                    ReplyMarkup = replyMarkup,
+                    ParseMode = parseMode,
+                    DisableWebPagePreview = disableWebPagePreview,
+                    DisableNotification = disableNotification,
+                    ReplyToMessageId = replyToMessageId
+                }, cancellationToken);
 
         public Task<MessagesResponse> EditMessageTextAsync(
             ChatId chatId,
@@ -106,12 +105,12 @@ namespace ICQ.Bot
             bool disableWebPagePreview = default,
             InlineKeyboardMarkup replyMarkup = default,
             CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text, replyMarkup)
-            {
-                ParseMode = parseMode,
-                DisableWebPagePreview = disableWebPagePreview
-            }, cancellationToken);
+        ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
+                {
+                    ReplyMarkup = replyMarkup,
+                    ParseMode = parseMode,
+                    DisableWebPagePreview = disableWebPagePreview
+                }, cancellationToken);
 
         public Task AnswerCallbackQueryAsync(
             string callbackQueryId,
@@ -120,11 +119,10 @@ namespace ICQ.Bot
             string url = default,
             int cacheTime = default,
             CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new AnswerCallbackQueryRequest(callbackQueryId, text, showAlert, url)
-            {
-                CacheTime = cacheTime
-            }, cancellationToken);
+        ) => MakeRequestAsync(new AnswerCallbackQueryRequest(callbackQueryId, text, showAlert, url)
+                {
+                    CacheTime = cacheTime
+                }, cancellationToken);
 
         public Task<MessagesResponse> SendFileAsync(
             ChatId chatId,
@@ -136,78 +134,56 @@ namespace ICQ.Bot
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
             CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new SendDocumentRequest(chatId, document, caption, replyMarkup)
-            {
-                Thumb = thumb,
-                ParseMode = parseMode,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyToMessageId
-            }, cancellationToken);
-
-        public Task<User> GetMeAsync(CancellationToken cancellationToken = default)
-                    => MakeRequestAsync(new GetMeRequest(), cancellationToken);
+        ) => MakeRequestAsync(new SendDocumentRequest(chatId, document)
+                {
+                    Caption = caption,
+                    ReplyMarkup = replyMarkup,
+                    Thumb = thumb,
+                    ParseMode = parseMode,
+                    DisableNotification = disableNotification,
+                    ReplyToMessageId = replyToMessageId
+                }, cancellationToken);
 
         public Task KickChatMemberAsync(
             ChatId chatId,
             int userId,
             DateTime untilDate = default,
             CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new KickChatMemberRequest(chatId, userId)
-            {
-                UntilDate = untilDate
-            }, cancellationToken);
+        ) => MakeRequestAsync(new KickChatMemberRequest(chatId, userId)
+                {
+                    UntilDate = untilDate
+                }, cancellationToken);
 
-        public Task UnbanChatMemberAsync(
-            ChatId chatId,
-            int userId,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new UnbanChatMemberRequest(chatId, userId), cancellationToken);
+        public Task<User> GetMeAsync(CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new GetMeRequest(), cancellationToken);
 
-        public Task<ChatAdmins> GetChatAdministratorsAsync(
-            ChatId chatId,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new GetChatAdministratorsRequest(chatId), cancellationToken);
+        public Task UnbanChatMemberAsync(ChatId chatId, int userId, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new UnbanChatMemberRequest(chatId, userId), cancellationToken);
 
-        public Task<ChatInfo> GetChatAsync(
-            ChatId chatId,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new GetChatRequest(chatId), cancellationToken);
+        public Task<ChatAdmins> GetChatAdministratorsAsync(ChatId chatId, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new GetChatAdministratorsRequest(chatId), cancellationToken);
 
-        public Task<Types.File> GetFileInfoAsync(
-            string fileId,
-            CancellationToken cancellationToken = default
-)        =>
-            MakeRequestAsync(new GetFileInfoRequest(fileId), cancellationToken);
+        public Task<ChatInfo> GetChatAsync(ChatId chatId, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new GetChatRequest(chatId), cancellationToken);
 
-        public Task SendChatActionsAsync(
-            ChatId chatId,
-            ChatAction chatAction,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new SendChatActionsRequest(chatId, chatAction), cancellationToken);
+        public Task<Types.File> GetFileInfoAsync(string fileId, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new GetFileInfoRequest(fileId), cancellationToken);
 
-        public Task DeleteMessagesAsync(ChatId chatId,
-            IEnumerable<int> messageIds,
-            CancellationToken cancellationToken = default
-        ) =>
-              MakeRequestAsync(new DeleteMessageRequest(chatId, messageIds), cancellationToken);
+        public Task SendChatActionsAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new SendChatActionsRequest(chatId, chatAction), cancellationToken);
 
-        public void StartReceiving(UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default)
+        public Task DeleteMessagesAsync(ChatId chatId, IEnumerable<int> messageIds, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new DeleteMessageRequest(chatId, messageIds), cancellationToken);
+
+        public void StartReceiving(Types.Enums.UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default)
         {
             _receivingCancellationTokenSource = new CancellationTokenSource();
-
             cancellationToken.Register(() => _receivingCancellationTokenSource.Cancel());
-
             ReceiveAsync(allowedUpdates, _receivingCancellationTokenSource.Token);
         }
 
         private async void ReceiveAsync(
-           UpdateType[] allowedUpdates,
+           Types.Enums.UpdateType[] allowedUpdates,
            CancellationToken cancellationToken = default)
         {
             IsReceiving = true;
@@ -355,7 +331,9 @@ namespace ICQ.Bot
             catch (TaskCanceledException e)
             {
                 if (cancellationToken.IsCancellationRequested)
+                {
                     throw;
+                }
 
                 throw new ApiRequestException("request timed out", 408, e);
             }

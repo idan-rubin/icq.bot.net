@@ -38,12 +38,11 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public IReplyMarkup ReplyMarkup { get; set; }
 
-        public SendMessageRequest(ChatId chatId, string text, IReplyMarkup replyMarkup)
+        public SendMessageRequest(ChatId chatId, string text)
             : base("/messages/sendText", HttpMethod.Get)
         {
             ChatId = chatId;
             Text = text;
-            ReplyMarkup = replyMarkup;
         }
 
         public override HttpContent ToHttpContent()

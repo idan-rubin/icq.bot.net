@@ -8,7 +8,7 @@ namespace ICQ.Bot.Types
     public class Updates
     {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public Update[] Events { get; set; }
+        public IEnumerable<Update> Events { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool Ok { get; set; }

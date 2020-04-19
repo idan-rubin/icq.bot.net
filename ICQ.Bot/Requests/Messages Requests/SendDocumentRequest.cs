@@ -41,13 +41,11 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public IReplyMarkup ReplyMarkup { get; set; }
 
-        public SendDocumentRequest(ChatId chatId, InputOnlineFile document, string caption, IReplyMarkup replyMarkup)
+        public SendDocumentRequest(ChatId chatId, InputOnlineFile document)
             : base("/messages/sendFile", HttpMethod.Post)
         {
             ChatId = chatId;
             Document = document;
-            Caption = caption;
-            ReplyMarkup = replyMarkup;
         }
 
         public override HttpContent ToHttpContent()
