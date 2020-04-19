@@ -3,17 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Idan Rubin (https://github.com/idan-rubin)</Authors>
+    <Authors>Idan Rubin</Authors>
     <Company></Company>
-    <Description>C# wrapper for ICQ Bot APIs</Description>
-    <Copyright />
+    <Description>HTTP-based interface created by developers for developers who wish to build ICQ bots.</Description>
+    <Copyright>Copyright © Idan Rubin 2020</Copyright>
     <RepositoryUrl>https://github.com/idan-rubin/icq.bot</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RootNamespace>ICQ.Bot</RootNamespace>
     <AssemblyName>ICQ.Bot</AssemblyName>
-    <PackageTags>icq;bot;bots;chatbot;chatbots;api</PackageTags>
+    <PackageTags>icq;bot;chatbot;bot-api;icq-bot</PackageTags>
     <Version>1.0.5</Version>
   </PropertyGroup>
 
