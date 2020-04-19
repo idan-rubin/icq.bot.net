@@ -39,10 +39,7 @@ public static void Main(string[] args)
 private static void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
 {
   var message = messageEventArgs.Message;
-  if (message != null && !string.IsNullOrEmpty(message.Text))
-  {
-    bot.SendTextMessageAsync(message.From.UserId, message.Text).Wait();
-  }
+  bot.SendTextMessageAsync(message.From.UserId, message.Text).Wait();
 }
 ```
 
