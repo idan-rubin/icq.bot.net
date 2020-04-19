@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using ICQ.Bot.Requests.Abstractions;
+﻿using ICQ.Bot.Requests.Abstractions;
 using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.ReplyMarkups;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Net.Http;
-using System.Web;
-using System.Collections.Generic;
 using System.Text;
 
 namespace ICQ.Bot.Requests
