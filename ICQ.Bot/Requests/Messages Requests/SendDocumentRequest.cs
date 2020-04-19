@@ -50,8 +50,11 @@ namespace ICQ.Bot.Requests
         public override HttpContent ToHttpContent()
         {
             //https://stackoverflow.com/questions/27376133/c-httpclient-with-post-parameters
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("chatId", ChatId);
+            Dictionary<string, string> parameters = new Dictionary<string, string>
+            {
+                { "chatId", ChatId }
+            };
+
             if (Document != null)
             {
                 parameters.Add("fileId", Document.FileId);
