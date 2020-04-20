@@ -34,7 +34,7 @@ public static void Main(string[] args)
   var me = bot.GetMeAsync().Result;
 
   bot.StartReceiving();
-  Console.WriteLine($"Start listening for @{me.Nick}");
+  Console.WriteLine($"Start listening to @{me.Nick}");
 
   Console.ReadLine();
   bot.StopReceiving();
