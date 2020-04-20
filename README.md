@@ -10,7 +10,7 @@ No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 
 
 ## What's in it for me?
 With this package you can:
-* Get Bot Events - polling is currently the only way to get events from ICQ :(
+* Respond to Bot Events
 * Send Text Messages
 * Edit Text Messages
 * Send Files (supports image and video)
