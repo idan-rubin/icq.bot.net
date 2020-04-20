@@ -4,7 +4,7 @@
 
 # icq.bot.net
 
-C# wrapper for ICQ Bot APIs. Inspired by [Telegram.Bot]
+HTTP-Based C# implementation for ICQ Bot APIs.
 
 No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 3.1 and Json.Net
 
