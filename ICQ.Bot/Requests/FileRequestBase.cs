@@ -1,46 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using ICQ.Bot.Helpers;
+﻿using ICQ.Bot.Helpers;
+using ICQ.Bot.Types;
+using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
+using ICQ.Bot.Types.ReplyMarkups;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
+using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public abstract class FileRequestBase<TResponse> : RequestBase<TResponse>
     {
+        [JsonProperty(Required = Required.Always)]
+        public ChatId ChatId { get; protected set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public InputOnlineFile Document { get; protected set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Caption { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public InputMedia Thumb { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public ParseMode ParseMode { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int ReplyToMessageId { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool DisableNotification { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public IReplyMarkup ReplyMarkup { get; set; }
+
         protected FileRequestBase(string methodName, HttpMethod method)
             : base(methodName, method)
         { }
 
-        protected MultipartFormDataContent ToMultipartFormDataContent(string fileParameterName, InputFileStream inputFile)
+        public MultipartFormDataContent ToMultipartFormDataContent(string fileParameterName, InputFileStream inputFile)
         {
-            var multipartContent = GenerateMultipartFormDataContent(fileParameterName);
+            string boundary = Guid.NewGuid().ToString();
+            var multipartContent = new MultipartFormDataContent(boundary);
+
+            //https://stackoverflow.com/questions/30926645/httpcontent-boundary-double-quotes
+            //https://blog.codetitans.pl/post/quoted-boundary-is-sometimes-not-acceptable/
+            multipartContent.Headers.Remove("Content-Type");
+            multipartContent.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary);
 
             multipartContent.AddStreamContent(inputFile.Content, fileParameterName, inputFile.FileName);
-
-            return multipartContent;
-        }
-
-        protected MultipartFormDataContent GenerateMultipartFormDataContent(params string[] exceptPropertyNames)
-        {
-            var multipartContent = new MultipartFormDataContent(Guid.NewGuid().ToString() + DateTime.UtcNow.Ticks);
-
-            var stringContents = JObject.FromObject(this)
-                .Properties()
-                .Where(prop => exceptPropertyNames?.Contains(prop.Name) == false)
-                .Select(prop => new
-                {
-                    prop.Name,
-                    Content = new StringContent(prop.Value.ToString())
-                });
-            foreach (var strContent in stringContents)
-                multipartContent.Add(strContent.Content, strContent.Name);
-
             return multipartContent;
         }
     }

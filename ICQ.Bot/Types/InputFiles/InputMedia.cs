@@ -1,11 +1,11 @@
-﻿using System.IO;
+﻿using ICQ.Bot.Types.InputFiles;
 using Newtonsoft.Json;
-using ICQ.Bot.Converters;
-using ICQ.Bot.Types.InputFiles;
+using Newtonsoft.Json.Serialization;
+using System.IO;
 
 namespace ICQ.Bot.Types
 {
-    [JsonConverter(typeof(InputMediaConverter))]
+    [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class InputMedia : InputOnlineFile
     {
         public InputMedia(Stream content, string fileName)
@@ -13,8 +13,8 @@ namespace ICQ.Bot.Types
         {
         }
 
-        public InputMedia(string value)
-            : base(value)
+        public InputMedia(string fileId)
+            : base(fileId)
         {
         }
 

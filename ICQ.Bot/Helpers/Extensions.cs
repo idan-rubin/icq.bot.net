@@ -3,8 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using ICQ.Bot.Types;
-using ICQ.Bot.Types.Enums;
 
 namespace ICQ.Bot.Helpers
 {
@@ -19,39 +17,22 @@ namespace ICQ.Bot.Helpers
             string name,
             string fileName = default)
         {
-            fileName ??= name;
-            string contentDisposision = $@"form-data; name=""{name}""; filename=""{fileName}""".EncodeUtf8();
+            string contentDisposition = $@"form-data; name=""{name}""";
+            if (!string.IsNullOrWhiteSpace(fileName))
+            {
+                contentDisposition = $@"{contentDisposition}; fileName=""{fileName}""";
+            }
 
             HttpContent mediaPartContent = new StreamContent(content)
             {
                 Headers =
                 {
                     {"Content-Type", "application/octet-stream"},
-                    {"Content-Disposition", contentDisposision}
+                    {"Content-Disposition", contentDisposition}
                 }
             };
 
-            multipartContent.Add(mediaPartContent, name, fileName);
-        }
-
-        internal static void AddContentIfInputFileStream(
-            this MultipartFormDataContent multipartContent,
-            params IInputMedia[] inputMedia
-        )
-        {
-            foreach (var input in inputMedia)
-            {
-                if (input.Media.FileType == FileType.Stream)
-                {
-                    multipartContent.AddStreamContent(input.Media.Content, input.Media.FileName);
-                }
-
-                var mediaThumb = (input as IInputMediaThumb)?.Thumb;
-                if (mediaThumb?.FileType == FileType.Stream)
-                {
-                    multipartContent.AddStreamContent(mediaThumb.Content, mediaThumb.FileName);
-                }
-            }
+            multipartContent.Add(mediaPartContent, name);
         }
     }
 }

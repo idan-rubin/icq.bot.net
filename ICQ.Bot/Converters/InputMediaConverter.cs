@@ -17,9 +17,6 @@ namespace ICQ.Bot.Converters
             switch (inputMediaType.FileType)
             {
                 case FileType.Id:
-                case FileType.Url:
-                    base.WriteJson(writer, value, serializer);
-                    break;
                 case FileType.Stream:
                     writer.WriteValue($"attach://{inputMediaType.FileName}");
                     break;

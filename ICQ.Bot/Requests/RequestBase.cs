@@ -25,8 +25,7 @@ namespace ICQ.Bot.Requests
 
         public virtual HttpContent ToHttpContent()
         {
-            string payload = JsonConvert.SerializeObject(this);
-            return new StringContent(payload, Encoding.UTF8, "application/json");
+            return null;
         }
     }
 }

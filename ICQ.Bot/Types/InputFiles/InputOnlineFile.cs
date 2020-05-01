@@ -11,9 +11,6 @@ namespace ICQ.Bot.Types.InputFiles
     [JsonConverter(typeof(InputFileConverter))]
     public class InputOnlineFile : InputICQFile
     {
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string Url { get; protected set; }
-
         /// <inheritdoc cref="IInputFile.FileType"/>
         public override FileType FileType
         {
@@ -21,7 +18,6 @@ namespace ICQ.Bot.Types.InputFiles
             {
                 if (Content != null) return FileType.Stream;
                 if (FileId != null) return FileType.Id;
-                if (Url != null) return FileType.Url;
                 throw new InvalidOperationException("Not a valid InputFile");
             }
         }
@@ -37,21 +33,9 @@ namespace ICQ.Bot.Types.InputFiles
             FileName = fileName;
         }
 
-        public InputOnlineFile(string value)
+        public InputOnlineFile(string fileId)
         {
-            if (Uri.TryCreate(value, UriKind.Absolute, out Uri _))
-            {
-                Url = value;
-            }
-            else
-            {
-                FileId = value;
-            }
-        }
-
-        public InputOnlineFile(Uri url)
-        {
-            Url = url.AbsoluteUri;
+            FileId = fileId;
         }
 
         public static implicit operator InputOnlineFile(Stream stream) =>

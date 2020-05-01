@@ -25,9 +25,6 @@ namespace ICQ.Bot.Converters
                 case FileType.Id when value is InputICQFile file:
                     writer.WriteValue(file.FileId);
                     break;
-                case FileType.Url when value is InputOnlineFile file:
-                    writer.WriteValue(file.Url);
-                    break;
                 default:
                     throw new NotSupportedException("File Type is not supported");
             }
@@ -42,10 +39,7 @@ namespace ICQ.Bot.Converters
             }
             else
             {
-                if (Uri.TryCreate(value, UriKind.Absolute, out Uri _))
-                    return new InputOnlineFile(value);
-                else
-                    return new InputICQFile(value);
+                return new InputICQFile(value);
             }
         }
     }

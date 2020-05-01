@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -134,15 +133,7 @@ namespace ICQ.Bot
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
             CancellationToken cancellationToken = default
-        ) => MakeRequestAsync(new SendDocumentRequest(chatId, document)
-                {
-                    Caption = caption,
-                    ReplyMarkup = replyMarkup,
-                    Thumb = thumb,
-                    ParseMode = parseMode,
-                    DisableNotification = disableNotification,
-                    ReplyToMessageId = replyToMessageId
-                }, cancellationToken);
+        ) => ProcessSenfFileRequestAsync(chatId, document, caption, parseMode, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
 
         public Task KickChatMemberAsync(
             ChatId chatId,
@@ -282,6 +273,42 @@ namespace ICQ.Bot
             }
         }
 
+        private Task<MessagesResponse> ProcessSenfFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, ParseMode parseMode, bool disableNotification, int replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
+        {
+            if (document == null)
+            {
+                throw new InvalidParameterException(nameof(document));
+            }
+
+            IRequest<MessagesResponse> request;
+            if (document.Content != null)
+            {
+                request = new SendFilePostRequest(chatId, document)
+                {
+                    Caption = caption,
+                    ReplyMarkup = replyMarkup,
+                    Thumb = thumb,
+                    ParseMode = parseMode,
+                    DisableNotification = disableNotification,
+                    ReplyToMessageId = replyToMessageId
+                };
+            }
+            else
+            {
+                request = new SendFileGetRequest(chatId, document)
+                {
+                    Caption = caption,
+                    ReplyMarkup = replyMarkup,
+                    Thumb = thumb,
+                    ParseMode = parseMode,
+                    DisableNotification = disableNotification,
+                    ReplyToMessageId = replyToMessageId
+                };
+            }
+
+            return MakeRequestAsync(request);
+        }
+
         private async Task<TResponse> MakeRequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
         {
             string url = string.Format("{0}{1}", baseUrl, request.MethodName);
@@ -313,14 +340,14 @@ namespace ICQ.Bot
                     queryString = string.Format("token={0}", _token);
                 }
 
+                url = string.Format("{0}?{1}", url, queryString);
                 if (request.Method == HttpMethod.Get)
                 {
-                    url = string.Format("{0}?{1}", url, queryString);
                     httpResponse = await _httpClient.GetAsync(url).ConfigureAwait(false);
                 }
                 else if (request.Method == HttpMethod.Post)
                 {
-                    HttpContent newEncodedContent = new StringContent(queryString, Encoding.UTF8, "application/x-www-form-urlencoded");
+                    HttpContent newEncodedContent = CreateContent(request);
                     httpResponse = await _httpClient.PostAsync(url, newEncodedContent).ConfigureAwait(false);
                 }
                 else
@@ -372,6 +399,27 @@ namespace ICQ.Bot
 
 
             return apiResponse;
+        }
+
+        private HttpContent CreateContent<TResponse>(IRequest<TResponse> request)
+        {
+            HttpContent result;
+            if (request is SendFilePostRequest)
+            {
+                var sendFileRequest = (request as SendFilePostRequest);
+                if (sendFileRequest.Document == null || sendFileRequest.Document.Content == null)
+                {
+                    throw new FileStreamNotFoundException();
+                }
+
+                result = sendFileRequest.ToMultipartFormDataContent("file", sendFileRequest.Document);
+            }
+            else
+            {
+                result = request.ToHttpContent();
+            }
+
+            return result;
         }
     }
 }
