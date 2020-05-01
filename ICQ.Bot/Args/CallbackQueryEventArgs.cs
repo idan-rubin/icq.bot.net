@@ -5,15 +5,15 @@ namespace ICQ.Bot.Args
 {
     public class CallbackQueryEventArgs : EventArgs
     {
-        public string CallbackQuery { get; }
+        public string CallbackData { get; }
         internal CallbackQueryEventArgs(Update update)
         {
-            CallbackQuery = update.CallbackQuery;
+            CallbackData = update.CallbackData;
         }
 
-        internal CallbackQueryEventArgs(string callbackQuery)
+        internal CallbackQueryEventArgs(string callbackData)
         {
-            CallbackQuery = callbackQuery;
+            CallbackData = callbackData;
         }
 
         public static implicit operator CallbackQueryEventArgs(UpdateEventArgs e) => new CallbackQueryEventArgs(e.Update);

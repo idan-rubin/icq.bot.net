@@ -29,9 +29,15 @@ namespace ICQ.Bot.Types
         public UpdatePayload Payload { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public DateTime Timestamp { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public DateTime EditedTimestamp { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string CallbackQuery { get; set; }
+        public string Text { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string CallbackData { get; set; }
     }
 }
