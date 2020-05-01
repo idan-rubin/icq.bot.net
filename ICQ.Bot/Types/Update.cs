@@ -36,8 +36,5 @@ namespace ICQ.Bot.Types
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Text { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string CallbackData { get; set; }
     }
 }
