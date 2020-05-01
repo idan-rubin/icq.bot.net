@@ -1,10 +1,7 @@
-﻿using System.Net.Http;
-using System.Text;
+﻿using ICQ.Bot.Requests.Abstractions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ICQ.Bot.Requests.Abstractions;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {

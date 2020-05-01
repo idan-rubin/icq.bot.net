@@ -1,6 +1,5 @@
 ﻿using ICQ.Bot.Requests.Abstractions;
 using ICQ.Bot.Types;
-using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
