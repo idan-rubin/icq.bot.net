@@ -8,7 +8,7 @@ namespace ICQ.Bot.Args
         public string CallbackData { get; }
         internal CallbackQueryEventArgs(Update update)
         {
-            CallbackData = update.CallbackData;
+            CallbackData = update.Payload.CallbackData;
         }
 
         internal CallbackQueryEventArgs(string callbackData)

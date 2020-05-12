@@ -23,6 +23,8 @@ namespace ICQ.Bot.Helpers
                 contentDisposition = $@"{contentDisposition}; fileName=""{fileName}""";
             }
 
+            //https://github.com/idan-rubin/icq.bot.net/issues/1
+            content.Position = 0;
             HttpContent mediaPartContent = new StreamContent(content)
             {
                 Headers =
