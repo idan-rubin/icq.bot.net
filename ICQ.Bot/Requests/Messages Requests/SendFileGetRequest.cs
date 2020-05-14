@@ -38,7 +38,7 @@ namespace ICQ.Bot.Requests
 
             if (ReplyMarkup != null)
             {
-                string markup = JsonConvert.SerializeObject(ReplyMarkup);
+                string markup = ReplyMarkup.ToJson();
                 queryString = string.Format("{0}&inlineKeyboardMarkup={1}", queryString, markup);
             }
 

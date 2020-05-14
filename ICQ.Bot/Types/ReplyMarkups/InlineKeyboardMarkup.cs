@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using ICQ.Bot.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -26,6 +28,11 @@ namespace ICQ.Bot.Types.ReplyMarkups
             InlineKeyboard = inlineKeyboard;
         }
 
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(InlineKeyboard);
+        }
+
         public static InlineKeyboardMarkup Empty() =>
             new InlineKeyboardMarkup(new InlineKeyboardButton[0][]);
 
@@ -48,5 +55,20 @@ namespace ICQ.Bot.Types.ReplyMarkups
             inlineKeyboard == null
                 ? null
                 : new InlineKeyboardMarkup(inlineKeyboard);
+    }
+
+    public static class InlineKeyboardMarkupHelper
+    {
+        internal static InlineKeyboardMarkup ToInlineKeyboardMarkup(this string value)
+        {
+            var result = new InlineKeyboardMarkup(JsonConvert.DeserializeObject<IEnumerable<InlineKeyboardButton>>(value));
+            return result;
+        }
+
+        internal static string ToStringValue(this InlineKeyboardMarkup value)
+        {
+            Console.WriteLine("booom!");
+            return JsonConvert.SerializeObject(value.InlineKeyboard);
+        }
     }
 }

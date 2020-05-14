@@ -45,7 +45,7 @@ namespace ICQ.Bot.Requests
             string queryString = string.Format("chatId={0}&msgId={1}&text={2}", ChatId, MessageId, Text);
             if (ReplyMarkup != null)
             {
-                string markup = JsonConvert.SerializeObject(ReplyMarkup);
+                string markup = ReplyMarkup.ToJson();
                 queryString = string.Format("{0}&inlineKeyboardMarkup={1}", queryString, markup);
             }
 
