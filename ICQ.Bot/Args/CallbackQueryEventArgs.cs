@@ -6,9 +6,11 @@ namespace ICQ.Bot.Args
     public class CallbackQueryEventArgs : EventArgs
     {
         public string CallbackData { get; }
+        public string QueryId { get; }
         internal CallbackQueryEventArgs(Update update)
         {
             CallbackData = update.Payload.CallbackData;
+            QueryId = update.Payload.QueryId;
         }
 
         internal CallbackQueryEventArgs(string callbackData)

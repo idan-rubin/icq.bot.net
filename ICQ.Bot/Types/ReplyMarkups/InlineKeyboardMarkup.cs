@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-using ICQ.Bot.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace ICQ.Bot.Types.ReplyMarkups
 {
@@ -32,9 +31,6 @@ namespace ICQ.Bot.Types.ReplyMarkups
         {
             return JsonConvert.SerializeObject(InlineKeyboard);
         }
-
-        public static InlineKeyboardMarkup Empty() =>
-            new InlineKeyboardMarkup(new InlineKeyboardButton[0][]);
 
         public static implicit operator InlineKeyboardMarkup(InlineKeyboardButton button) =>
             button == null

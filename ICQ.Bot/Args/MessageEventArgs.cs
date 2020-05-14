@@ -20,15 +20,11 @@ namespace ICQ.Bot.Args
                     Timestamp = update.Payload.Timestamp
                 };
 
-                if (update.Payload.Parts != null && update.Payload.Parts.Count() != 0)
+                if (update.Payload.Message != null)
                 {
-                    var part = update.Payload.Parts.ToList()[0];
-                    if (part.Payload != null)
-                    {
-                        Message.Caption = part.Payload.Caption;
-                        Message.FileId = part.Payload.FileId;
-                        Message.FileType = part.Payload.Type;
-                    }
+                    Message.Caption = update.Payload.Message.Caption;
+                    Message.FileId = update.Payload.Message.FileId;
+                    Message.FileType = update.Payload.Message.FileType;
                 }
             }
         }

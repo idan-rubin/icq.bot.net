@@ -6,16 +6,6 @@ namespace ICQ.Bot.Types
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class PayloadPart
     {
-        [JsonProperty(Required = Required.Always)]
-        public string Type { get; set; }
-
-        [JsonProperty(Required = Required.Always)]
-        public PayloadPartPayload Payload { get; set; }
-    }
-
-    [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class PayloadPartPayload
-    {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Type { get; set; }
 
@@ -27,5 +17,14 @@ namespace ICQ.Bot.Types
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public UpdatePayload Message { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Text { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Url { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string CallbackData { get; set; }
     }
 }

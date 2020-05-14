@@ -30,11 +30,7 @@ namespace ICQ.Bot.Types
         public string QueryId { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public Update Message { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public IEnumerable<PayloadPart> Parts { get; set; }
-
+        public Message Message { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string CallbackData { get; set; }

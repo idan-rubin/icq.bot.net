@@ -118,8 +118,10 @@ namespace ICQ.Bot
             string url = default,
             int cacheTime = default,
             CancellationToken cancellationToken = default
-        ) => MakeRequestAsync(new AnswerCallbackQueryRequest(callbackQueryId, text, showAlert, url)
+        ) => MakeRequestAsync(new AnswerCallbackQueryRequest(callbackQueryId, text)
                 {
+                    Url = url,
+                    ShowAlert = showAlert,
                     CacheTime = cacheTime
                 }, cancellationToken);
 

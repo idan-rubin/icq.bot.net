@@ -25,13 +25,11 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public int CacheTime { get; set; }
 
-        public AnswerCallbackQueryRequest(string callbackQueryId, string text, bool showAlert, string url)
+        public AnswerCallbackQueryRequest(string callbackQueryId, string text)
             : base("/messages/answerCallbackQuery", HttpMethod.Get)
         {
             QueryId = callbackQueryId;
             Text = text;
-            ShowAlert = showAlert;
-            Url = url;
         }
 
         public override HttpContent ToHttpContent()

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
 
 namespace ICQ.Bot.Types
 {
@@ -30,5 +31,8 @@ namespace ICQ.Bot.Types
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string FileType { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public IEnumerable<PayloadParts> Parts { get; set; }
     }
 }
