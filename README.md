@@ -1,4 +1,4 @@
-[![package](https://img.shields.io/badge/ICQ.Bot-v1.1.0-blue)](https://www.nuget.org/packages/ICQ.Bot)
+[![package](https://img.shields.io/badge/ICQ.Bot-v1.1.1-blue)](https://www.nuget.org/packages/ICQ.Bot)
 [![icq chat](https://img.shields.io/badge/Community-Chat-blue)](https://icq.im/bots_dotnet)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/idan-rubin/icq.bot.net/blob/master/LICENSE)
 
