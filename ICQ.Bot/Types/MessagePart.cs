@@ -5,10 +5,10 @@ using System.Collections.Generic;
 namespace ICQ.Bot.Types
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class PayloadParts
+    public class MessagePart
     {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public IEnumerable<IEnumerable<PayloadPart>> Payload { get; set; }
+        public IEnumerable<IEnumerable<Payload>> Payload { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Type { get; set; }
