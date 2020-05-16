@@ -135,7 +135,7 @@ namespace ICQ.Bot
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
             CancellationToken cancellationToken = default
-        ) => ProcessSenfFileRequestAsync(chatId, document, caption, parseMode, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
+        ) => ProcessSendFileRequestAsync(chatId, document, caption, parseMode, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
 
         public Task KickChatMemberAsync(
             ChatId chatId,
@@ -275,7 +275,7 @@ namespace ICQ.Bot
             }
         }
 
-        private Task<MessagesResponse> ProcessSenfFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, ParseMode parseMode, bool disableNotification, int replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
+        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, ParseMode parseMode, bool disableNotification, int replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
         {
             if (document == null)
             {
@@ -308,7 +308,7 @@ namespace ICQ.Bot
                 };
             }
 
-            return MakeRequestAsync(request);
+            return MakeRequestAsync(request, cancellationToken);
         }
 
         private async Task<TResponse> MakeRequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
