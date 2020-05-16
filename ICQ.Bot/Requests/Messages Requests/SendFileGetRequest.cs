@@ -5,8 +5,8 @@ using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Specialized;
 using System.Net.Http;
-using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -23,26 +23,31 @@ namespace ICQ.Bot.Requests
             Document = document;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
             if (Document == null || string.IsNullOrWhiteSpace(Document.FileId))
             {
                 throw new FileIdNotFoundException();
             }
 
-            string queryString = string.Format("chatId={0}&fileId={1}", ChatId, Document.FileId);
+            var result = new NameValueCollection
+            {
+                { "chatId", ChatId },
+                { "fileId", Document.FileId }
+            };
+
             if (!string.IsNullOrWhiteSpace(Caption))
             {
-                queryString = string.Format("{0}&caption={1}", queryString, Caption);
+                result.Add("caption", Caption);
             }
 
             if (ReplyMarkup != null)
             {
                 string markup = ReplyMarkup.ToJson();
-                queryString = string.Format("{0}&inlineKeyboardMarkup={1}", queryString, markup);
+                result.Add("inlineKeyboardMarkup", markup);
             }
 
-            return new StringContent(queryString, Encoding.UTF8);
+            return result;
         }
     }
 }

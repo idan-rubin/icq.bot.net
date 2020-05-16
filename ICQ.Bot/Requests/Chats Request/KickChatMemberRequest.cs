@@ -1,10 +1,10 @@
-using System;
+using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using ICQ.Bot.Types;
+using System;
+using System.Collections.Specialized;
 using System.Net.Http;
-using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -28,10 +28,15 @@ namespace ICQ.Bot.Requests
             UserId = userId;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
-            string queryString = string.Format("chatId={0}&userId={1}", ChatId, UserId);
-            return new StringContent(queryString, Encoding.UTF8);
+            var result = new NameValueCollection
+            {
+                { "chatId", ChatId },
+                { "userId", UserId.ToString() }
+            };
+
+            return result;
         }
     }
 }

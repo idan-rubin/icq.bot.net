@@ -1,6 +1,7 @@
 using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text;
 
@@ -22,10 +23,15 @@ namespace ICQ.Bot.Requests
             Timeout = timeout;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
-            string queryString = string.Format("lastEventId={0}&pollTime={1}", Offset, Timeout);
-            return new StringContent(queryString, Encoding.UTF8);
+            var result = new NameValueCollection
+            {
+                { "lastEventId", Offset.ToString() },
+                { "pollTime", Timeout.ToString() },
+            };
+
+            return result;
         }
     }
 }

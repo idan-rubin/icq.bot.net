@@ -4,8 +4,8 @@ using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Specialized;
 using System.Net.Http;
-using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -40,16 +40,22 @@ namespace ICQ.Bot.Requests
             Text = text;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
-            string queryString = string.Format("chatId={0}&msgId={1}&text={2}", ChatId, MessageId, Text);
+            var result = new NameValueCollection
+            {
+                { "chatId", ChatId },
+                { "mgsId", MessageId.ToString() },
+                { "text", Text },
+            };
+
             if (ReplyMarkup != null)
             {
                 string markup = ReplyMarkup.ToJson();
-                queryString = string.Format("{0}&inlineKeyboardMarkup={1}", queryString, markup);
+                result.Add("inlineKeyboardMarkup", markup);
             }
 
-            return new StringContent(queryString, Encoding.UTF8);
+            return result;
         }
     }
 }

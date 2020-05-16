@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using ICQ.Bot.Types;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ICQ.Bot.Types;
+using System.Collections.Specialized;
 using System.Net.Http;
-using System.Web;
-using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -19,10 +18,14 @@ namespace ICQ.Bot.Requests
             FileId = fileId;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
-            string queryString = string.Format("fileId={0}", FileId);
-            return new StringContent(queryString, Encoding.UTF8);
+            var result = new NameValueCollection
+            {
+                { "fileId", FileId }
+            };
+
+            return result;
         }
     }
 }

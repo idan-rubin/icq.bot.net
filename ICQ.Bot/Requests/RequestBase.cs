@@ -1,7 +1,11 @@
 ﻿using ICQ.Bot.Requests.Abstractions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Web;
 
 namespace ICQ.Bot.Requests
 {
@@ -20,9 +24,34 @@ namespace ICQ.Bot.Requests
             Method = method;
         }
 
-        public virtual HttpContent ToHttpContent()
+        public abstract NameValueCollection BuildParameters();
+
+        public HttpContent ToHttpContent()
         {
-            return null;
+            NameValueCollection parameters = BuildParameters();
+            if (parameters == null || parameters.Count == 0)
+            {
+                return null;
+            }
+
+            string queryString = ToQueryString(parameters);
+            HttpContent result = new StringContent(queryString, Encoding.UTF8);
+            return result;
+        }
+
+        //https://stackoverflow.com/questions/829080/how-to-build-a-query-string-for-a-url-in-c
+        private static string ToQueryString(NameValueCollection nvc)
+        {
+            var array = (
+                from key in nvc.AllKeys
+                from value in nvc.GetValues(key)
+                select string.Format(
+            "{0}={1}",
+            HttpUtility.UrlEncode(key),
+            HttpUtility.UrlEncode(value))
+                ).ToArray();
+
+            return string.Join("&", array);
         }
     }
 }

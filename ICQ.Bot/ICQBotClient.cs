@@ -314,9 +314,10 @@ namespace ICQ.Bot
         private async Task<TResponse> MakeRequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
         {
             string url = string.Format("{0}{1}", baseUrl, request.MethodName);
+            HttpContent httpContent = request.ToHttpContent();
             var httpRequest = new HttpRequestMessage(request.Method, url)
             {
-                Content = request.ToHttpContent(),
+                Content = httpContent,
             };
 
             var reqDataArgs = new ApiRequestEventArgs
@@ -329,7 +330,7 @@ namespace ICQ.Bot
             HttpResponseMessage httpResponse;
             try
             {
-                HttpContent encodedContent = request.ToHttpContent();
+                HttpContent encodedContent = httpContent;
                 string queryString;
                 if (encodedContent != null)
                 {
@@ -350,7 +351,7 @@ namespace ICQ.Bot
                 else if (request.Method == HttpMethod.Post)
                 {
                     HttpContent newEncodedContent = CreateContent(request);
-                    httpResponse = await _httpClient.PostAsync(url, newEncodedContent).ConfigureAwait(false);
+                    httpResponse = await _httpClient.PostAsync(url, newEncodedContent ?? httpContent).ConfigureAwait(false);
                 }
                 else
                 {
@@ -405,7 +406,7 @@ namespace ICQ.Bot
 
         private HttpContent CreateContent<TResponse>(IRequest<TResponse> request)
         {
-            HttpContent result;
+            HttpContent result = null;
             if (request is SendFilePostRequest)
             {
                 var sendFileRequest = (request as SendFilePostRequest);
@@ -415,10 +416,6 @@ namespace ICQ.Bot
                 }
 
                 result = sendFileRequest.ToMultipartFormDataContent("file", sendFileRequest.Document);
-            }
-            else
-            {
-                result = request.ToHttpContent();
             }
 
             return result;

@@ -2,8 +2,8 @@
 using ICQ.Bot.Types.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Specialized;
 using System.Net.Http;
-using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -23,12 +23,18 @@ namespace ICQ.Bot.Requests
             Action = action;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
             string tempAction = Action.ToString();
             string newAction = string.Format("{0}{1}", char.ToLower(tempAction[0]), tempAction.Substring(1));
-            string queryString = string.Format("chatId={0}&actions=[{1}]", ChatId, newAction);
-            return new StringContent(queryString, Encoding.UTF8);
+            string action = string.Format("[{0}]", newAction);
+            var result = new NameValueCollection
+            {
+                { "chatId", ChatId },
+                { "actions", action }
+            };
+
+            return result;
         }
     }
 }

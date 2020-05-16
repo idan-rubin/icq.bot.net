@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Specialized;
+using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -10,6 +11,11 @@ namespace ICQ.Bot.Requests
         public ParameterlessRequest(string methodName, HttpMethod method)
             : base(methodName, method)
         {
+        }
+
+        public override NameValueCollection BuildParameters()
+        {
+            return null;
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using ICQ.Bot.Types;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ICQ.Bot.Types;
-using System.Net.Http;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.Specialized;
+using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {
@@ -23,12 +23,16 @@ namespace ICQ.Bot.Requests
             MessageIds = messageIds;
         }
 
-        public override HttpContent ToHttpContent()
+        public override NameValueCollection BuildParameters()
         {
             string msgIds = JsonConvert.SerializeObject(MessageIds);
-            string queryString = string.Format("chatId={0}&mgsId={1}", ChatId, msgIds);
+            var result = new NameValueCollection
+            {
+                { "chatId", ChatId },
+                { "mgsId", msgIds }
+            };
 
-            return new StringContent(queryString, Encoding.UTF8);
+            return result;
         }
     }
 }
