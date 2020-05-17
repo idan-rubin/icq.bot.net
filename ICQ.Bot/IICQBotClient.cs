@@ -91,7 +91,7 @@ namespace ICQ.Bot
             CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/messages/get_messages_deleteMessages"/>
-        Task DeleteMessagesAsync(
+        Task DeleteMessageAsync(
             ChatId chatId,
             long messageId,
             CancellationToken cancellationToken = default);
