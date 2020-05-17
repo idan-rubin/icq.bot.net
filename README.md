@@ -11,8 +11,8 @@ No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 
 ## What's in it for me?
 With this package you can:
 * Respond to Bot Events
-* Send Text Messages
-* Edit Text Messages
+* Send, Edit and Delete Text Messages
+* Send Inline Buttons with Text Messages
 * Send Files (supports image and video)
 
 ## How do I get it?
