@@ -45,7 +45,7 @@ namespace ICQ.Bot.Requests
             var result = new NameValueCollection
             {
                 { "chatId", ChatId },
-                { "mgsId", MessageId.ToString() },
+                { "msgId", MessageId.ToString() },
                 { "text", Text },
             };
 

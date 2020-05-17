@@ -93,7 +93,7 @@ namespace ICQ.Bot
         /// <see href="https://icq.com/botapi/#/messages/get_messages_deleteMessages"/>
         Task DeleteMessagesAsync(
             ChatId chatId,
-            IEnumerable<long> messageIds,
+            long messageId,
             CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/chats/get_chats_sendActions"/>

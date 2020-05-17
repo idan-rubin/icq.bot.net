@@ -14,22 +14,21 @@ namespace ICQ.Bot.Requests
         public ChatId ChatId { get; }
 
         [JsonProperty(Required = Required.Always)]
-        public IEnumerable<long> MessageIds { get; }
+        public long MessageId { get; }
 
-        public DeleteMessageRequest(ChatId chatId, IEnumerable<long> messageIds)
+        public DeleteMessageRequest(ChatId chatId, long messageId)
             : base("/messages/deleteMessages", HttpMethod.Get)
         {
             ChatId = chatId;
-            MessageIds = messageIds;
+            MessageId = messageId;
         }
 
         public override NameValueCollection BuildParameters()
         {
-            string msgIds = JsonConvert.SerializeObject(MessageIds);
             var result = new NameValueCollection
             {
                 { "chatId", ChatId },
-                { "mgsId", msgIds }
+                { "msgId", MessageId.ToString() }
             };
 
             return result;

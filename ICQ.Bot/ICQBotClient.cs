@@ -161,8 +161,8 @@ namespace ICQ.Bot
         public Task SendChatActionsAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default)
             => MakeRequestAsync(new SendChatActionsRequest(chatId, chatAction), cancellationToken);
 
-        public Task DeleteMessagesAsync(ChatId chatId, IEnumerable<long> messageIds, CancellationToken cancellationToken = default)
-            => MakeRequestAsync(new DeleteMessageRequest(chatId, messageIds), cancellationToken);
+        public Task DeleteMessagesAsync(ChatId chatId, long messageId, CancellationToken cancellationToken = default)
+            => MakeRequestAsync(new DeleteMessageRequest(chatId, messageId), cancellationToken);
 
         public void StartReceiving(Types.Enums.UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default)
         {
