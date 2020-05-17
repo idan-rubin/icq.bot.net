@@ -1,6 +1,7 @@
 ﻿using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Specialized;
 using System.Net.Http;
 
@@ -15,6 +16,11 @@ namespace ICQ.Bot.Requests
         public GetFileInfoRequest(string fileId)
             : base("/files/getInfo", HttpMethod.Get)
         {
+            if (string.IsNullOrWhiteSpace(fileId))
+            {
+                throw new ArgumentException(nameof(fileId));
+            }
+
             FileId = fileId;
         }
 

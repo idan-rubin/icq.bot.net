@@ -1,9 +1,9 @@
 ﻿using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Specialized;
 using System.Net.Http;
-using System.Web;
 
 namespace ICQ.Bot.Requests
 {
@@ -28,6 +28,11 @@ namespace ICQ.Bot.Requests
         public AnswerCallbackQueryRequest(string callbackQueryId)
             : base("/messages/answerCallbackQuery", HttpMethod.Get)
         {
+            if (string.IsNullOrWhiteSpace(callbackQueryId))
+            {
+                throw new ArgumentException(nameof(callbackQueryId));
+            }
+
             QueryId = callbackQueryId;
         }
 

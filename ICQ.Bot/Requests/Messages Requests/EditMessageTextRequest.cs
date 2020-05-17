@@ -45,9 +45,13 @@ namespace ICQ.Bot.Requests
             var result = new NameValueCollection
             {
                 { "chatId", ChatId },
-                { "msgId", MessageId.ToString() },
-                { "text", Text },
+                { "msgId", MessageId.ToString() }
             };
+
+            if (!string.IsNullOrWhiteSpace(Text))
+            {
+                result.Add("text", Text);
+            }
 
             if (ReplyMarkup != null)
             {
