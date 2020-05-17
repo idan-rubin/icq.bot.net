@@ -1,7 +1,7 @@
-﻿using ICQ.Bot.Types;
+﻿using ICQ.Bot.Exceptions;
+using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Specialized;
 using System.Net.Http;
 
@@ -30,7 +30,7 @@ namespace ICQ.Bot.Requests
         {
             if (string.IsNullOrWhiteSpace(callbackQueryId))
             {
-                throw new ArgumentException(nameof(callbackQueryId));
+                throw new InvalidParameterException(nameof(callbackQueryId));
             }
 
             QueryId = callbackQueryId;

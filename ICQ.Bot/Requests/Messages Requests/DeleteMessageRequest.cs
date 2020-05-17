@@ -1,7 +1,6 @@
 ﻿using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Http;
 

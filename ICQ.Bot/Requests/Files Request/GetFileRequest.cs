@@ -1,7 +1,7 @@
-﻿using ICQ.Bot.Types;
+﻿using ICQ.Bot.Exceptions;
+using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Specialized;
 using System.Net.Http;
 
@@ -18,7 +18,7 @@ namespace ICQ.Bot.Requests
         {
             if (string.IsNullOrWhiteSpace(fileId))
             {
-                throw new ArgumentException(nameof(fileId));
+                throw new InvalidParameterException(nameof(fileId));
             }
 
             FileId = fileId;
