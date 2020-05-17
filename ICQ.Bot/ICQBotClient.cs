@@ -81,16 +81,14 @@ namespace ICQ.Bot
         public Task<MessagesResponse> SendTextMessageAsync(
             ChatId chatId,
             string text,
-            ParseMode parseMode = default,
             bool disableWebPagePreview = default,
             bool disableNotification = default,
-            int replyToMessageId = default,
+            long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             CancellationToken cancellationToken = default
         ) => MakeRequestAsync(new SendMessageRequest(chatId, text)
                 {
                     ReplyMarkup = replyMarkup,
-                    ParseMode = parseMode,
                     DisableWebPagePreview = disableWebPagePreview,
                     DisableNotification = disableNotification,
                     ReplyToMessageId = replyToMessageId
@@ -98,16 +96,14 @@ namespace ICQ.Bot
 
         public Task<MessagesResponse> EditMessageTextAsync(
             ChatId chatId,
-            int messageId,
+            long messageId,
             string text,
-            ParseMode parseMode = default,
             bool disableWebPagePreview = default,
             InlineKeyboardMarkup replyMarkup = default,
             CancellationToken cancellationToken = default
         ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
                 {
                     ReplyMarkup = replyMarkup,
-                    ParseMode = parseMode,
                     DisableWebPagePreview = disableWebPagePreview
                 }, cancellationToken);
 
@@ -130,13 +126,12 @@ namespace ICQ.Bot
             ChatId chatId,
             InputOnlineFile document,
             string caption = default,
-            ParseMode parseMode = default,
             bool disableNotification = default,
-            int replyToMessageId = default,
+            long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
             CancellationToken cancellationToken = default
-        ) => ProcessSendFileRequestAsync(chatId, document, caption, parseMode, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
+        ) => ProcessSendFileRequestAsync(chatId, document, caption, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
 
         public Task KickChatMemberAsync(
             ChatId chatId,
@@ -166,7 +161,7 @@ namespace ICQ.Bot
         public Task SendChatActionsAsync(ChatId chatId, ChatAction chatAction, CancellationToken cancellationToken = default)
             => MakeRequestAsync(new SendChatActionsRequest(chatId, chatAction), cancellationToken);
 
-        public Task DeleteMessagesAsync(ChatId chatId, IEnumerable<int> messageIds, CancellationToken cancellationToken = default)
+        public Task DeleteMessagesAsync(ChatId chatId, IEnumerable<long> messageIds, CancellationToken cancellationToken = default)
             => MakeRequestAsync(new DeleteMessageRequest(chatId, messageIds), cancellationToken);
 
         public void StartReceiving(Types.Enums.UpdateType[] allowedUpdates = null, CancellationToken cancellationToken = default)
@@ -276,7 +271,7 @@ namespace ICQ.Bot
             }
         }
 
-        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, ParseMode parseMode, bool disableNotification, int replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
+        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
         {
             if (document == null)
             {
@@ -291,7 +286,6 @@ namespace ICQ.Bot
                     Caption = caption,
                     ReplyMarkup = replyMarkup,
                     Thumb = thumb,
-                    ParseMode = parseMode,
                     DisableNotification = disableNotification,
                     ReplyToMessageId = replyToMessageId
                 };
@@ -303,7 +297,6 @@ namespace ICQ.Bot
                     Caption = caption,
                     ReplyMarkup = replyMarkup,
                     Thumb = thumb,
-                    ParseMode = parseMode,
                     DisableNotification = disableNotification,
                     ReplyToMessageId = replyToMessageId
                 };

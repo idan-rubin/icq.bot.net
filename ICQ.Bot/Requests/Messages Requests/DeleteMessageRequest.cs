@@ -14,9 +14,9 @@ namespace ICQ.Bot.Requests
         public ChatId ChatId { get; }
 
         [JsonProperty(Required = Required.Always)]
-        public IEnumerable<int> MessageIds { get; }
+        public IEnumerable<long> MessageIds { get; }
 
-        public DeleteMessageRequest(ChatId chatId, IEnumerable<int> messageIds)
+        public DeleteMessageRequest(ChatId chatId, IEnumerable<long> messageIds)
             : base("/messages/deleteMessages", HttpMethod.Get)
         {
             ChatId = chatId;

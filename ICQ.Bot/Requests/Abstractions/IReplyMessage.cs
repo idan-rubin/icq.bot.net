@@ -2,6 +2,6 @@
 {
     public interface IReplyMessage
     {
-        int ReplyToMessageId { get; set; }
+        long ReplyToMessageId { get; set; }
     }
 }

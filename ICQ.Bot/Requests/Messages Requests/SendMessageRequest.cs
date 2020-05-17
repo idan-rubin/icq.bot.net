@@ -32,7 +32,7 @@ namespace ICQ.Bot.Requests
         public bool DisableNotification { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int ReplyToMessageId { get; set; }
+        public long ReplyToMessageId { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public IReplyMarkup ReplyMarkup { get; set; }

@@ -17,7 +17,7 @@ namespace ICQ.Bot.Requests
         public ChatId ChatId { get; }
 
         [JsonProperty(Required = Required.Always)]
-        public int MessageId { get; }
+        public long MessageId { get; }
 
         [JsonProperty(Required = Required.Always)]
         public string Text { get; }
@@ -32,7 +32,7 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
 
-        public EditMessageTextRequest(ChatId chatId, int messageId, string text)
+        public EditMessageTextRequest(ChatId chatId, long messageId, string text)
             : base("/messages/editText", HttpMethod.Get)
         {
             ChatId = chatId;

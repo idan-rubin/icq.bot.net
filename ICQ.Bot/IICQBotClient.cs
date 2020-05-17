@@ -48,19 +48,17 @@ namespace ICQ.Bot
         Task<MessagesResponse> SendTextMessageAsync(
             ChatId chatId,
             string text,
-            ParseMode parseMode = default,
             bool disableWebPagePreview = default,
             bool disableNotification = default,
-            int replyToMessageId = default,
+            long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/messages/get_messages_editText"/>
         Task<MessagesResponse> EditMessageTextAsync(
             ChatId chatId,
-            int messageId,
+            long messageId,
             string text,
-            ParseMode parseMode = default,
             bool disableWebPagePreview = default,
             InlineKeyboardMarkup replyMarkup = default,
             CancellationToken cancellationToken = default);
@@ -70,9 +68,8 @@ namespace ICQ.Bot
             ChatId chatId,
             InputOnlineFile document,
             string caption = default,
-            ParseMode parseMode = default,
             bool disableNotification = default,
-            int replyToMessageId = default,
+            long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
             CancellationToken cancellationToken = default);
@@ -96,7 +93,7 @@ namespace ICQ.Bot
         /// <see href="https://icq.com/botapi/#/messages/get_messages_deleteMessages"/>
         Task DeleteMessagesAsync(
             ChatId chatId,
-            IEnumerable<int> messageIds,
+            IEnumerable<long> messageIds,
             CancellationToken cancellationToken = default);
 
         /// <see href="https://icq.com/botapi/#/chats/get_chats_sendActions"/>

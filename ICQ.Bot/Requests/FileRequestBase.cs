@@ -29,7 +29,7 @@ namespace ICQ.Bot.Requests
         public ParseMode ParseMode { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int ReplyToMessageId { get; set; }
+        public long ReplyToMessageId { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool DisableNotification { get; set; }
