@@ -44,7 +44,7 @@ namespace ICQ.Bot.Requests
         {
             var array = (
                 from key in nvc.AllKeys
-                from value in nvc.GetValues(key)
+                from value in nvc.GetValues(key).Where(v => v != null)
                 select string.Format(
             "{0}={1}",
             HttpUtility.UrlEncode(key),
