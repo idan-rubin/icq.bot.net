@@ -25,20 +25,23 @@ namespace ICQ.Bot.Requests
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public int CacheTime { get; set; }
 
-        public AnswerCallbackQueryRequest(string callbackQueryId, string text)
+        public AnswerCallbackQueryRequest(string callbackQueryId)
             : base("/messages/answerCallbackQuery", HttpMethod.Get)
         {
             QueryId = callbackQueryId;
-            Text = text;
         }
 
         public override NameValueCollection BuildParameters()
         {
             var result = new NameValueCollection
             {
-                { "queryId", QueryId },
-                { "text", Text },
+                { "queryId", QueryId }
             };
+
+            if (!string.IsNullOrWhiteSpace(Text))
+            {
+                result.Add("text", Text);
+            }
 
             if (ShowAlert)
             {
