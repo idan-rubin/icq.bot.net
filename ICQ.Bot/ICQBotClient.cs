@@ -324,11 +324,10 @@ namespace ICQ.Bot
             HttpResponseMessage httpResponse;
             try
             {
-                HttpContent encodedContent = httpContent;
                 string queryString;
-                if (encodedContent != null)
+                if (httpContent != null)
                 {
-                    string prefix = await encodedContent.ReadAsStringAsync();
+                    string prefix = await httpContent.ReadAsStringAsync();
                     prefix = HttpUtility.UrlDecode(prefix);
                     queryString = string.Format("{0}&token={1}", prefix, _token);
                 }
