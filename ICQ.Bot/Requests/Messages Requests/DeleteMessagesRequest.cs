@@ -1,25 +1,33 @@
-﻿using ICQ.Bot.Types;
+﻿using ICQ.Bot.Exceptions;
+using ICQ.Bot.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Net.Http;
 
 namespace ICQ.Bot.Requests
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class DeleteMessageRequest : RequestBase<ActionResponse>
+    public class DeleteMessagesRequest : RequestBase<ActionResponse>
     {
         [JsonProperty(Required = Required.Always)]
         public ChatId ChatId { get; }
 
         [JsonProperty(Required = Required.Always)]
-        public long MessageId { get; }
+        public IEnumerable<long> MessageIds { get; }
 
-        public DeleteMessageRequest(ChatId chatId, long messageId)
+        public DeleteMessagesRequest(ChatId chatId, IEnumerable<long> messageIds)
             : base("/messages/deleteMessages", HttpMethod.Get)
         {
+            if (messageIds == null || messageIds.Count() == 0)
+            {
+                throw new InvalidParameterException(nameof(messageIds));
+            }
+
             ChatId = chatId;
-            MessageId = messageId;
+            MessageIds = messageIds;
         }
 
         public override NameValueCollection BuildParameters()
@@ -27,8 +35,12 @@ namespace ICQ.Bot.Requests
             var result = new NameValueCollection
             {
                 { "chatId", ChatId },
-                { "msgId", MessageId.ToString() }
             };
+
+            foreach(var messageId in MessageIds)
+            {
+                result.Add("msgId", messageId.ToString());
+            }
 
             return result;
         }
