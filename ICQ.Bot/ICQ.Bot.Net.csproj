@@ -12,7 +12,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>ICQ.Bot</PackageId>
-    <Authors>ICQ.Bot</Authors>
+    <Authors>Idan Rubin</Authors>
     <Product>ICQ.Bot</Product>
   </PropertyGroup>
 
