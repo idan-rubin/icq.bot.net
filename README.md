@@ -1,4 +1,4 @@
-[![package](https://img.shields.io/badge/ICQ.Bot-v1.4.1-blue)](https://www.nuget.org/packages/ICQ.Bot)
+[![package](https://img.shields.io/badge/ICQ.Bot-v1.4.3-blue)](https://www.nuget.org/packages/ICQ.Bot)
 [![icq chat](https://img.shields.io/badge/Community-Chat-blue)](https://icq.im/bots_dotnet)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/idan-rubin/icq.bot.net/blob/master/LICENSE)
 
@@ -6,7 +6,7 @@
 
 HTTP-Based C# implementation for ICQ Bot APIs.
 
-No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Core 3.1 and Json.Net
+No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Standard 2.0 and Json.Net
 
 ## What's in it for me?
 With this package you can:
