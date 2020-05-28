@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>HTTP-based interface created for developers who wish to build ICQ bots.</Description>
+    <Copyright>Copyright © Idan Rubin 2020</Copyright>
+    <Version>1.4.2</Version>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/idan-rubin/icq.bot</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>icq;bot;chatbot;bot-api;icq-bot</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>ICQ.Bot</PackageId>
+    <Authors>ICQ.Bot</Authors>
+    <Product>ICQ.Bot</Product>
   </PropertyGroup>
 
   <ItemGroup>
