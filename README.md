@@ -24,7 +24,7 @@ Usage is similar to the excellent .Net [Telegram.Bot] project.
 ## Simple Bot Project
 Check out a simple English/Russian translator bot written in less than an hour! [ICQTranslatorBot]
 
-Simple Echo Bot:
+## Simple Echo Bot
 ```csharp
 using ICQ.Bot.Args;
 using System;
