@@ -22,7 +22,7 @@ NuGet package is avaiable at [nuget.org]
 Usage is similar to the excellent .Net [Telegram.Bot] project.
 
 ## Simple Bot Project
-Check out a simple English/Russian translator bot written in less then an hour! [ICQTranslatorBot]
+Check out a simple English/Russian translator bot written in less than an hour! [ICQTranslatorBot]
 
 Simple Echo Bot:
 ```csharp
