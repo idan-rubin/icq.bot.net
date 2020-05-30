@@ -21,9 +21,6 @@ NuGet package is avaiable at [nuget.org]
 ## How do I ramp up?
 Usage is similar to the excellent .Net [Telegram.Bot] project.
 
-## Simple Bot Project
-Check out a simple English/Russian translator bot written in less than an hour! [ICQTranslatorBot]
-
 ## Simple Echo Bot
 ```csharp
 using ICQ.Bot.Args;
@@ -49,6 +46,9 @@ private static void BotOnMessageReceived(object sender, MessageEventArgs message
   bot.SendTextMessageAsync(message.From.UserId, message.Text).Wait();
 }
 ```
+
+## Simple Translator Bot
+Check out a simple English/Russian translator bot: [ICQTranslatorBot]
 
 Let's make .Net the #1 client for ICQ bots!
 
