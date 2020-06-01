@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>HTTP-based interface created for developers who wish to build ICQ bots.</Description>
     <Copyright>Copyright © Idan Rubin 2020</Copyright>
-    <Version>1.4.4</Version>
+    <Version>1.4.5</Version>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/idan-rubin/icq.bot</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
