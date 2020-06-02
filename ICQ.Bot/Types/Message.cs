@@ -32,7 +32,7 @@ namespace ICQ.Bot.Types
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string FileType { get; set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public IEnumerable<MessagePart> Parts { get; set; }
+        //[JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        //public IEnumerable<MessagePart> Parts { get; set; }
     }
 }
