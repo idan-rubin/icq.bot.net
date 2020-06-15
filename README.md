@@ -26,7 +26,7 @@ Usage is similar to the excellent .Net [Telegram.Bot] project.
 using ICQ.Bot.Args;
 using System;
 
-private readonly static IICQBotClient bot = new ICQBotClient("[BOT_ID_FROM_ICQ_METABOT]");
+private readonly static IICQBotClient bot = new ICQBotClient("BOT_ID_FROM_ICQ_METABOT");
 
 public static void Main(string[] args)
 {
