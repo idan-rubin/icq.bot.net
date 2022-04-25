@@ -10,6 +10,7 @@ using ICQ.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -209,8 +210,8 @@ namespace ICQ.Bot
                         foreach (var update in updates.Events)
                         {
                             OnUpdateReceived(new UpdateEventArgs(update));
-                            MessageOffset = update.EventId + 1;
                         }
+                        MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
                     }
                 }
                 catch
@@ -327,7 +328,7 @@ namespace ICQ.Bot
                 string queryString;
                 if (httpContent != null)
                 {
-                    string prefix = await httpContent.ReadAsStringAsync();
+                    string prefix = await httpContent.ReadAsStringAsync().ConfigureAwait(false);
                     prefix = HttpUtility.UrlDecode(prefix);
                     queryString = string.Format("{0}&token={1}", prefix, _token);
                 }
@@ -392,7 +393,6 @@ namespace ICQ.Bot
                 string text = string.Format("response failed to be parsed");
                 throw new ApiRequestException(text);
             }
-
 
             return apiResponse;
         }
