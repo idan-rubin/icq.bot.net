@@ -1,4 +1,12 @@
-﻿using ICQ.Bot.Args;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+
+using ICQ.Bot.Args;
 using ICQ.Bot.Converters;
 using ICQ.Bot.Exceptions;
 using ICQ.Bot.Requests;
@@ -7,15 +15,9 @@ using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
+
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
+
 
 namespace ICQ.Bot
 {
