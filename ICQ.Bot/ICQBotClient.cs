@@ -43,6 +43,9 @@ namespace ICQ.Bot
         public bool IsReceiving { get; set; }
 
         private CancellationTokenSource _receivingCancellationTokenSource;
+        /// <summary>
+        /// Id of the last known (processed) event.
+        /// </summary>
         public int MessageOffset { get; set; }
 
         public ICQBotClient(string token, HttpClient httpClient = null)
@@ -210,8 +213,9 @@ namespace ICQ.Bot
                         foreach (var update in updates.Events)
                         {
                             OnUpdateReceived(new UpdateEventArgs(update));
+                            MessageOffset = update.EventId;
                         }
-                        MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
+                        //MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
                     }
                 }
                 catch
