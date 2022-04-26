@@ -4,9 +4,9 @@
 
 # icq.bot.net
 
-HTTP-Based C# implementation for ICQ Bot APIs.
+HTTP-Based C# implementation for ICQ Bot APIs (also known as Mail.ru Agent bot API / VK Teams bot API).
 
-No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Standard 2.0 and Json.Net
+No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Standard 2.0 and Newtonsoft.Json
 
 ## What's in it for me?
 With this package you can:
