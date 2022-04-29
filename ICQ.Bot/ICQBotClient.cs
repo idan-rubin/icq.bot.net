@@ -1,4 +1,12 @@
-﻿using ICQ.Bot.Args;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+
+using ICQ.Bot.Args;
 using ICQ.Bot.Converters;
 using ICQ.Bot.Exceptions;
 using ICQ.Bot.Requests;
@@ -7,14 +15,9 @@ using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
+
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
+
 
 namespace ICQ.Bot
 {
@@ -42,6 +45,9 @@ namespace ICQ.Bot
         public bool IsReceiving { get; set; }
 
         private CancellationTokenSource _receivingCancellationTokenSource;
+        /// <summary>
+        /// Id of the last known (processed) event.
+        /// </summary>
         public int MessageOffset { get; set; }
 
         public ICQBotClient(string token, HttpClient httpClient = null)
@@ -209,8 +215,9 @@ namespace ICQ.Bot
                         foreach (var update in updates.Events)
                         {
                             OnUpdateReceived(new UpdateEventArgs(update));
-                            MessageOffset = update.EventId + 1;
+                            MessageOffset = update.EventId;
                         }
+                        //MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
                     }
                 }
                 catch
@@ -327,7 +334,7 @@ namespace ICQ.Bot
                 string queryString;
                 if (httpContent != null)
                 {
-                    string prefix = await httpContent.ReadAsStringAsync();
+                    string prefix = await httpContent.ReadAsStringAsync().ConfigureAwait(false);
                     prefix = HttpUtility.UrlDecode(prefix);
                     queryString = string.Format("{0}&token={1}", prefix, _token);
                 }
@@ -392,7 +399,6 @@ namespace ICQ.Bot
                 string text = string.Format("response failed to be parsed");
                 throw new ApiRequestException(text);
             }
-
 
             return apiResponse;
         }

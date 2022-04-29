@@ -15,7 +15,7 @@ namespace ICQ.Bot.Types
             Identifier = identifier;
         }
 
-        public ChatId(int chatId)
+        public ChatId(int chatId)   
         {
             Identifier = chatId;
         }
