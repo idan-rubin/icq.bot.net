@@ -7,8 +7,7 @@ namespace ICQ.Bot.Types.Enums
     public enum ParseMode
     {
         Default = 0,
-        Markdown,
-        Html,
-        MarkdownV2,
+        HTML,
+        MarkdownV2
     }
 }

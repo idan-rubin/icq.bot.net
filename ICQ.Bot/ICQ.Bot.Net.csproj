@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>HTTP-based interface created for developers who wish to build ICQ bots.</Description>
     <Copyright>Copyright © Idan Rubin 2020</Copyright>
-    <Version>1.4.6</Version>
+    <Version>1.4.7</Version>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/idan-rubin/icq.bot</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
@@ -14,10 +14,12 @@
     <PackageId>ICQ.Bot</PackageId>
     <Authors>Idan Rubin</Authors>
     <Product>ICQ.Bot</Product>
+    <PackageReleaseNotes>* Update nuGet packages
+* Bugfixes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Specialized;
 using System.Net.Http;
-using System.Text;
 
 namespace ICQ.Bot.Requests
 {
@@ -60,6 +59,11 @@ namespace ICQ.Bot.Requests
             {
                 string markup = ReplyMarkup.ToJson();
                 result.Add("inlineKeyboardMarkup", markup);
+            }
+
+            if (ParseMode != ParseMode.Default)
+            {
+                result.Add("parseMode", ParseMode.ToString());
             }
 
             return result;
