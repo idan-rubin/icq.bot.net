@@ -5,7 +5,7 @@
 
 # icq.bot.net
 
-HTTP-Based C# implementation for [ICQ Bot APIs](https://icq.com/botapi/) (also known as [Mail.ru Agent bot API](https://agent.mail.ru/botapi/?lang=ru) / [VK Teams](https://help.mail.ru/biz/myteam) bot API).
+Lightweight HTTP-Based C# implementation for [ICQ Bot APIs](https://icq.com/botapi/) (also known as [Mail.ru Agent bot API](https://agent.mail.ru/botapi/?lang=ru) / [VK Teams](https://help.mail.ru/biz/myteam) bot API).
 
 No Microsoft proprietary mambo jumbo needed! Built on the goodness of .Net Standard 2.0 and Newtonsoft.Json
 
