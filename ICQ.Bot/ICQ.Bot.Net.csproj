@@ -15,7 +15,6 @@
     <Authors>Idan Rubin</Authors>
     <Product>ICQ.Bot</Product>
     <PackageReleaseNotes>* Update nuGet packages
-* Added support for message text formatting
 * Bugfixes</PackageReleaseNotes>
   </PropertyGroup>
 
