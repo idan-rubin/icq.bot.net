@@ -38,7 +38,7 @@ namespace ICQ.Bot
 
         public TimeSpan Timeout
         {
-            get => HttpClientTimeout.Subtract(TimeSpan.FromSeconds(10));
+            get => _httpClient.Timeout.Subtract(TimeSpan.FromSeconds(10));
         }
 
         public bool IsReceiving { get; set; }
