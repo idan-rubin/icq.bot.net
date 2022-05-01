@@ -30,8 +30,6 @@ namespace ICQ.Bot
 
         private const string baseUrl = "https://api.icq.net/bot/v1";
 
-        private const string baseFileUrl = "https://files.icq.net/get";
-
         private readonly string _token;
 
         private readonly HttpClient _httpClient;
@@ -91,13 +89,15 @@ namespace ICQ.Bot
             bool disableNotification = default,
             long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new SendMessageRequest(chatId, text)
                 {
                     ReplyMarkup = replyMarkup,
                     DisableWebPagePreview = disableWebPagePreview,
                     DisableNotification = disableNotification,
-                    ReplyToMessageId = replyToMessageId
+                    ReplyToMessageId = replyToMessageId,
+                    ParseMode = parsedMode
                 }, cancellationToken);
 
         public Task<MessagesResponse> EditMessageTextAsync(
@@ -106,12 +106,14 @@ namespace ICQ.Bot
             string text,
             bool disableWebPagePreview = default,
             InlineKeyboardMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
                 {
                     ReplyMarkup = replyMarkup,
-                    DisableWebPagePreview = disableWebPagePreview
-                }, cancellationToken);
+                    DisableWebPagePreview = disableWebPagePreview,
+                    ParseMode = parsedMode
+        }, cancellationToken);
 
         public Task AnswerCallbackQueryAsync(
             string callbackQueryId,
@@ -136,8 +138,9 @@ namespace ICQ.Bot
             long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
-            CancellationToken cancellationToken = default
-        ) => ProcessSendFileRequestAsync(chatId, document, caption, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2
+        ) => ProcessSendFileRequestAsync(chatId, document, caption, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken, parsedMode);
 
         public Task KickChatMemberAsync(
             ChatId chatId,
@@ -217,7 +220,6 @@ namespace ICQ.Bot
                             OnUpdateReceived(new UpdateEventArgs(update));
                             MessageOffset = update.EventId;
                         }
-                        //MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
                     }
                 }
                 catch
@@ -278,7 +280,7 @@ namespace ICQ.Bot
             }
         }
 
-        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
+        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken, ParseMode parseMode)
         {
             if (document == null)
             {
@@ -294,7 +296,8 @@ namespace ICQ.Bot
                     ReplyMarkup = replyMarkup,
                     Thumb = thumb,
                     DisableNotification = disableNotification,
-                    ReplyToMessageId = replyToMessageId
+                    ReplyToMessageId = replyToMessageId,
+                    ParseMode = parseMode
                 };
             }
             else

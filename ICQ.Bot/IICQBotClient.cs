@@ -52,7 +52,8 @@ namespace ICQ.Bot
             bool disableNotification = default,
             long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2);
 
         /// <see href="https://icq.com/botapi/#/messages/get_messages_editText"/>
         Task<MessagesResponse> EditMessageTextAsync(
@@ -61,7 +62,8 @@ namespace ICQ.Bot
             string text,
             bool disableWebPagePreview = default,
             InlineKeyboardMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2);
 
         /// <see href="https://icq.com/botapi/#/messages/get_messages_sendFile"/>
         Task<MessagesResponse> SendFileAsync(
@@ -72,7 +74,8 @@ namespace ICQ.Bot
             long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2);
 
         /// <see href="https://icq.com/botapi/#/chats/get_chats_blockUser"/>
         Task KickChatMemberAsync(
