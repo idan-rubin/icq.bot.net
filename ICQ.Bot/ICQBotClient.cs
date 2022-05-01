@@ -34,10 +34,11 @@ namespace ICQ.Bot
 
         private readonly HttpClient _httpClient;
 
+        private readonly TimeSpan HttpClientTimeout = TimeSpan.FromMinutes(1);
+
         public TimeSpan Timeout
         {
-            get => _httpClient.Timeout;
-            set => _httpClient.Timeout = value;
+            get => HttpClientTimeout.Subtract(TimeSpan.FromSeconds(10));
         }
 
         public bool IsReceiving { get; set; }
@@ -51,7 +52,10 @@ namespace ICQ.Bot
         public ICQBotClient(string token, HttpClient httpClient = null)
         {
             _token = token;
-            _httpClient = httpClient ?? new HttpClient();
+            _httpClient = httpClient ?? new HttpClient
+            {
+                Timeout = HttpClientTimeout
+            };
         }
 
         public ICQBotClient(string token, IWebProxy webProxy)
@@ -62,7 +66,10 @@ namespace ICQ.Bot
                 Proxy = webProxy,
                 UseProxy = true
             };
-            _httpClient = new HttpClient(httpClientHander);
+            _httpClient = new HttpClient(httpClientHander)
+            {
+                Timeout = HttpClientTimeout
+            };
         }
 
         public event EventHandler<ApiRequestEventArgs> MakingApiRequest;
