@@ -17,7 +17,7 @@ namespace ICQ.Bot
     /// </summary>
     public interface IICQBotClient
     {
-        TimeSpan Timeout { get; set; }
+        TimeSpan Timeout { get; }
         bool IsReceiving { get; }
         int MessageOffset { get; set; }
 
