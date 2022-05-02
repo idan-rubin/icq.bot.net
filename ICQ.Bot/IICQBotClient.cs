@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using File = ICQ.Bot.Types.File;
 
 namespace ICQ.Bot
 {
@@ -17,7 +16,7 @@ namespace ICQ.Bot
     /// </summary>
     public interface IICQBotClient
     {
-        TimeSpan Timeout { get; set; }
+        TimeSpan Timeout { get; }
         bool IsReceiving { get; }
         int MessageOffset { get; set; }
 
