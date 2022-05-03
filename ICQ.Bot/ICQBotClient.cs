@@ -217,7 +217,6 @@ namespace ICQ.Bot
                             OnUpdateReceived(new UpdateEventArgs(update));
                             MessageOffset = update.EventId;
                         }
-                        //MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
                     }
                 }
                 catch
@@ -392,7 +391,6 @@ namespace ICQ.Bot
                     httpResponse.EnsureSuccessStatusCode();
                     break;
             }
-
             var apiResponse = JsonConvert.DeserializeObject<TResponse>(responseJson, new DateTimeConverter());
             if (apiResponse == null)
             {
