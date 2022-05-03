@@ -1,4 +1,12 @@
-﻿using ICQ.Bot.Args;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+
+using ICQ.Bot.Args;
 using ICQ.Bot.Converters;
 using ICQ.Bot.Exceptions;
 using ICQ.Bot.Requests;
@@ -7,7 +15,9 @@ using ICQ.Bot.Types;
 using ICQ.Bot.Types.Enums;
 using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
+
 using Newtonsoft.Json;
+<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +26,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+=======
+
+>>>>>>> e185c3e934c0f51764e2bc2007e4b32f11d12831
 
 namespace ICQ.Bot
 {
@@ -28,27 +41,32 @@ namespace ICQ.Bot
 
         private const string baseUrl = "https://api.icq.net/bot/v1";
 
-        private const string baseFileUrl = "https://files.icq.net/get";
-
         private readonly string _token;
 
         private readonly HttpClient _httpClient;
 
+        private readonly TimeSpan HttpClientTimeout = TimeSpan.FromMinutes(1);
+
         public TimeSpan Timeout
         {
-            get => _httpClient.Timeout;
-            set => _httpClient.Timeout = value;
+            get => _httpClient.Timeout.Subtract(TimeSpan.FromSeconds(5));
         }
 
         public bool IsReceiving { get; set; }
 
         private CancellationTokenSource _receivingCancellationTokenSource;
+        /// <summary>
+        /// Id of the last known (processed) event.
+        /// </summary>
         public int MessageOffset { get; set; }
 
         public ICQBotClient(string token, HttpClient httpClient = null)
         {
             _token = token;
-            _httpClient = httpClient ?? new HttpClient();
+            _httpClient = httpClient ?? new HttpClient
+            {
+                Timeout = HttpClientTimeout
+            };
         }
 
         public ICQBotClient(string token, IWebProxy webProxy)
@@ -59,7 +77,10 @@ namespace ICQ.Bot
                 Proxy = webProxy,
                 UseProxy = true
             };
-            _httpClient = new HttpClient(httpClientHander);
+            _httpClient = new HttpClient(httpClientHander)
+            {
+                Timeout = HttpClientTimeout
+            };
         }
 
         public event EventHandler<ApiRequestEventArgs> MakingApiRequest;
@@ -86,13 +107,15 @@ namespace ICQ.Bot
             bool disableNotification = default,
             long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new SendMessageRequest(chatId, text)
                 {
                     ReplyMarkup = replyMarkup,
                     DisableWebPagePreview = disableWebPagePreview,
                     DisableNotification = disableNotification,
-                    ReplyToMessageId = replyToMessageId
+                    ReplyToMessageId = replyToMessageId,
+                    ParseMode = parsedMode
                 }, cancellationToken);
 
         public Task<MessagesResponse> EditMessageTextAsync(
@@ -101,12 +124,14 @@ namespace ICQ.Bot
             string text,
             bool disableWebPagePreview = default,
             InlineKeyboardMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
                 {
                     ReplyMarkup = replyMarkup,
-                    DisableWebPagePreview = disableWebPagePreview
-                }, cancellationToken);
+                    DisableWebPagePreview = disableWebPagePreview,
+                    ParseMode = parsedMode
+        }, cancellationToken);
 
         public Task AnswerCallbackQueryAsync(
             string callbackQueryId,
@@ -131,8 +156,9 @@ namespace ICQ.Bot
             long replyToMessageId = default,
             IReplyMarkup replyMarkup = default,
             InputMedia thumb = default,
-            CancellationToken cancellationToken = default
-        ) => ProcessSendFileRequestAsync(chatId, document, caption, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken);
+            CancellationToken cancellationToken = default,
+            ParseMode parsedMode = ParseMode.MarkdownV2
+        ) => ProcessSendFileRequestAsync(chatId, document, caption, disableNotification, replyToMessageId, replyMarkup, thumb, cancellationToken, parsedMode);
 
         public Task KickChatMemberAsync(
             ChatId chatId,
@@ -210,6 +236,10 @@ namespace ICQ.Bot
                         foreach (var update in updates.Events)
                         {
                             OnUpdateReceived(new UpdateEventArgs(update));
+<<<<<<< HEAD
+=======
+                            MessageOffset = update.EventId;
+>>>>>>> e185c3e934c0f51764e2bc2007e4b32f11d12831
                         }
                         MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
                     }
@@ -272,7 +302,7 @@ namespace ICQ.Bot
             }
         }
 
-        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken)
+        private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken, ParseMode parseMode)
         {
             if (document == null)
             {
@@ -288,7 +318,8 @@ namespace ICQ.Bot
                     ReplyMarkup = replyMarkup,
                     Thumb = thumb,
                     DisableNotification = disableNotification,
-                    ReplyToMessageId = replyToMessageId
+                    ReplyToMessageId = replyToMessageId,
+                    ParseMode = parseMode
                 };
             }
             else
