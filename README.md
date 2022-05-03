@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-[![package](https://img.shields.io/badge/ICQ.Bot-v1.4.6-blue)](https://www.nuget.org/packages/ICQ.Bot)
-[![icq chat](https://img.shields.io/badge/Community-Chat-yellow)](https://icq.im/bots_dotnet)
-[![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/idan-rubin/icq.bot.net/blob/master/LICENSE)
-[![Bot API Version](https://img.shields.io/badge/Bot%20API%20Version-20.03.2020-ff69b4)](https://agent.mail.ru/botapi/?lang=en#/self/get_self_get)
-
-# icq.bot.net
-
-HTTP-Based C# implementation for [ICQ Bot APIs](https://icq.com/botapi/) (also known as [Mail.ru Agent bot API](https://agent.mail.ru/botapi/?lang=ru) / [VK Teams](https://help.mail.ru/biz/myteam) bot API).
-=======
 [![package](https://img.shields.io/badge/ICQ.Bot-v1.4.8-blue)](https://www.nuget.org/packages/ICQ.Bot)
 [![icq chat](https://img.shields.io/badge/Community-Chat-purple)](https://icq.im/bots_dotnet)
 [![license](https://img.shields.io/badge/license-MIT-orange)](https://github.com/idan-rubin/icq.bot.net/blob/master/LICENSE)
