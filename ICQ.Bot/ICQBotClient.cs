@@ -112,7 +112,7 @@ namespace ICQ.Bot
             long messageId,
             string text,
             bool disableWebPagePreview = default,
-            InlineKeyboardMarkup replyMarkup = default,
+            InlineKeyboardMarkup replyMarkup = default,            
             CancellationToken cancellationToken = default,
             ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
