@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
+
 namespace ICQ.Bot.Types
 {
     /// <summary>
@@ -14,7 +15,7 @@ namespace ICQ.Bot.Types
     /// "ok": true}
     /// </code>
     /// </example>
-[JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class File : FileBase
     {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
