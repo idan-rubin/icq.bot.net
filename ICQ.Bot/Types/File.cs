@@ -8,12 +8,13 @@ namespace ICQ.Bot.Types
     /// </summary>
     /// <example>
     /// <code>
-    /// {"filename": "Новый прейскурант - Scan ГАЗПРОМ[13582].pdf", "size": 362738, "type": "application", 
-    /// "url": "https://ub.icq.net/files/get/dFhlO9tuqZ3YMxyHLwrsuoNwrs8Pqh6xq5Cv5ge3Z8Cx6rszAhty6CHKRQipwgWFyVuKVcncSKZHKcBKFgEGLgDwa6Fh5fV0IhYXIa9hpPTs3sMjTyJKXv4EUgxK7NQhTbdJlKtjdZcKTLokng41S8rh8MLwrs/%D0%9D%D0%BE%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%B5%D0%B9%D1%81%D0%BA%D1%83%D1%80%D0%B0%D0%BD%D1%82%20-%20Scan%20%D0%93%D0%90%D0%97%D0%9F%D0%A0%D0%9E%D0%9C%5B13582%5D.pdf", 
+    /// {"filename": "Аттестат (из ЕАИСТО).jpg", 
+    /// "size": 164242, "type": "image", 
+    /// "url": "https://ub.icq.net/files/get/0ggaN0004SY5hwvsKsZYrTrmDrTxEnrj9hlc1Ess1jUyAhzLNDBx5mV7qhrKFdAxP4fL6xy0o1Vs717wasTFBuXKTdExEKkL5rpKvoDzLK6dH63s8NjU0xTR4vYKYnJYEgkyNG4KBbupdxgZHC7xhfDwtx4AYrTx/%D0%90%D1%82%D1%82%D0%B5%D1%81%D1%82%D0%B0%D1%82%20%28%D0%B8%D0%B7%20%D0%95%D0%90%D0%98%D0%A1%D0%A2%D0%9E%29.jpg", 
     /// "ok": true}
     /// </code>
     /// </example>
-    [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+[JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class File : FileBase
     {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
