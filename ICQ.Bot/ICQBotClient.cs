@@ -17,18 +17,7 @@ using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
 
 using Newtonsoft.Json;
-<<<<<<< HEAD
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-=======
 
->>>>>>> e185c3e934c0f51764e2bc2007e4b32f11d12831
 
 namespace ICQ.Bot
 {
@@ -123,7 +112,7 @@ namespace ICQ.Bot
             long messageId,
             string text,
             bool disableWebPagePreview = default,
-            InlineKeyboardMarkup replyMarkup = default,
+            InlineKeyboardMarkup replyMarkup = default,            
             CancellationToken cancellationToken = default,
             ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
@@ -236,12 +225,8 @@ namespace ICQ.Bot
                         foreach (var update in updates.Events)
                         {
                             OnUpdateReceived(new UpdateEventArgs(update));
-<<<<<<< HEAD
-=======
                             MessageOffset = update.EventId;
->>>>>>> e185c3e934c0f51764e2bc2007e4b32f11d12831
-                        }
-                        MessageOffset = updates.Events.LastOrDefault()?.EventId ?? MessageOffset;
+                        }                        
                     }
                 }
                 catch
@@ -301,7 +286,7 @@ namespace ICQ.Bot
                     break;
             }
         }
-
+        
         private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken, ParseMode parseMode)
         {
             if (document == null)
@@ -417,7 +402,6 @@ namespace ICQ.Bot
                     httpResponse.EnsureSuccessStatusCode();
                     break;
             }
-
             var apiResponse = JsonConvert.DeserializeObject<TResponse>(responseJson, new DateTimeConverter());
             if (apiResponse == null)
             {
