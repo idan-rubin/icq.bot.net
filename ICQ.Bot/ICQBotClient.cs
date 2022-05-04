@@ -17,18 +17,7 @@ using ICQ.Bot.Types.InputFiles;
 using ICQ.Bot.Types.ReplyMarkups;
 
 using Newtonsoft.Json;
-<<<<<<< HEAD
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-=======
 
->>>>>>> e185c3e934c0f51764e2bc2007e4b32f11d12831
 
 namespace ICQ.Bot
 {
