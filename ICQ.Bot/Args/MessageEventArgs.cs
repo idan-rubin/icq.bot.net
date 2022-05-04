@@ -30,13 +30,22 @@ namespace ICQ.Bot.Args
                 }
 
                 ForwardedMessages = new List<Message>();
-                if (update.Payload.Parts != null && update.Payload.Parts.Count() != 0)
+                if ((update.Payload.Parts?.Count() ?? 0) != 0)
                 {
                     foreach (var part in update.Payload.Parts)
                     {
-                        if (part.Payload != null && part.Payload.Message != null && part.Type == "forward")
+                        if (part.Payload != null)
                         {
-                            ForwardedMessages.Add(part.Payload.Message);
+                            if (part.Payload.Message != null && part.Type == "forward")
+                            {
+                                ForwardedMessages.Add(part.Payload.Message);
+                            }
+                            else if (part.Type == "file")
+                            {
+                                Message.Caption = part.Payload.Caption;
+                                Message.FileId = part.Payload.FileId;
+                                Message.FileType = part.Type;
+                            }
                         }
                     }
                 }
