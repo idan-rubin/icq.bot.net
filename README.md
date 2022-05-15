@@ -19,9 +19,6 @@ With this package you can:
 ## How do I get it?
 NuGet package is avaiable at [nuget.org]
 
-## How do I ramp up?
-Usage is similar to the excellent .Net [Telegram.Bot] project.
-
 ## Simple Echo Bot
 ```csharp
 using ICQ.Bot.Args;
