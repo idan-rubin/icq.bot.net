@@ -112,7 +112,7 @@ namespace ICQ.Bot
             long messageId,
             string text,
             bool disableWebPagePreview = default,
-            InlineKeyboardMarkup replyMarkup = default,
+            InlineKeyboardMarkup replyMarkup = default,            
             CancellationToken cancellationToken = default,
             ParseMode parsedMode = ParseMode.MarkdownV2
         ) => MakeRequestAsync(new EditMessageTextRequest(chatId, messageId, text)
@@ -226,7 +226,7 @@ namespace ICQ.Bot
                         {
                             OnUpdateReceived(new UpdateEventArgs(update));
                             MessageOffset = update.EventId;
-                        }
+                        }                        
                     }
                 }
                 catch
@@ -286,7 +286,7 @@ namespace ICQ.Bot
                     break;
             }
         }
-
+        
         private Task<MessagesResponse> ProcessSendFileRequestAsync(ChatId chatId, InputOnlineFile document, string caption, bool disableNotification, long replyToMessageId, IReplyMarkup replyMarkup, InputMedia thumb, CancellationToken cancellationToken, ParseMode parseMode)
         {
             if (document == null)
@@ -402,7 +402,6 @@ namespace ICQ.Bot
                     httpResponse.EnsureSuccessStatusCode();
                     break;
             }
-
             var apiResponse = JsonConvert.DeserializeObject<TResponse>(responseJson, new DateTimeConverter());
             if (apiResponse == null)
             {
